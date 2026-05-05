@@ -3,7 +3,7 @@ package co.edu.uco.treepruning.features.pqr.submitpqr.application.usecase.domain
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class SubmitPQRDomain {
+public final class SubmitPQRDomain {
 	private UUID id;
 	private LocalDate date;
 	private UUID status;
@@ -11,8 +11,6 @@ public class SubmitPQRDomain {
 	private UUID risk;
 	private UUID person;
 	private String photographicRecordPath;
-	
-	
 	
 	public SubmitPQRDomain(LocalDate date, UUID status, UUID sector, UUID risk, UUID person,
 			String photographicRecordPath) {

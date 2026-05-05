@@ -1,5 +1,5 @@
 package co.edu.uco.treepruning.application.inputport;
 
-public interface InputPort<T, R> {
-	R execute(T data);
+public interface InputPort<D, R> {
+    R execute(D data);
 }
