@@ -3,10 +3,10 @@ package co.edu.uco.treepruning.infrastructure.persistence.repository.entity;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import co.edu.uco.treepruning.crosscuting.helper.DateHelper;
-import co.edu.uco.treepruning.crosscuting.helper.ObjectHelper;
-import co.edu.uco.treepruning.crosscuting.helper.TextHelper;
-import co.edu.uco.treepruning.crosscuting.helper.UUIDHelper;
+import co.edu.uco.treepruning.crosscutting.helper.DateHelper;
+import co.edu.uco.treepruning.crosscutting.helper.ObjectHelper;
+import co.edu.uco.treepruning.crosscutting.helper.TextHelper;
+import co.edu.uco.treepruning.crosscutting.helper.UUIDHelper;
 
 public class PQREntity {
     private UUID id;

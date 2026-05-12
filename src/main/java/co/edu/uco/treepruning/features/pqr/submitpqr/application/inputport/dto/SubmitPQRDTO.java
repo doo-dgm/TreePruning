@@ -3,9 +3,9 @@ package co.edu.uco.treepruning.features.pqr.submitpqr.application.inputport.dto;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import co.edu.uco.treepruning.crosscuting.helper.DateHelper;
-import co.edu.uco.treepruning.crosscuting.helper.TextHelper;
-import co.edu.uco.treepruning.crosscuting.helper.UUIDHelper;
+import co.edu.uco.treepruning.crosscutting.helper.DateHelper;
+import co.edu.uco.treepruning.crosscutting.helper.TextHelper;
+import co.edu.uco.treepruning.crosscutting.helper.UUIDHelper;
 
 public final class SubmitPQRDTO {
 

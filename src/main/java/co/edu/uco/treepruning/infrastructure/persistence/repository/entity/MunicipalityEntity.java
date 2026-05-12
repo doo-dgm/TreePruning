@@ -2,9 +2,9 @@ package co.edu.uco.treepruning.infrastructure.persistence.repository.entity;
 
 import java.util.UUID;
 
-import co.edu.uco.treepruning.crosscuting.helper.ObjectHelper;
-import co.edu.uco.treepruning.crosscuting.helper.TextHelper;
-import co.edu.uco.treepruning.crosscuting.helper.UUIDHelper;
+import co.edu.uco.treepruning.crosscutting.helper.ObjectHelper;
+import co.edu.uco.treepruning.crosscutting.helper.TextHelper;
+import co.edu.uco.treepruning.crosscutting.helper.UUIDHelper;
 
 public class MunicipalityEntity {
     private UUID id;
