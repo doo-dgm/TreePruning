@@ -1,4 +1,4 @@
-package co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.impl;
+package co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.impl.mapper;
 
 import org.mapstruct.Mapper;
 import co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.domain.GetStatusDomain;

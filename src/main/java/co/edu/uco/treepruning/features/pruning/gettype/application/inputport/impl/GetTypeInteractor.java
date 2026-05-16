@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import co.edu.uco.treepruning.features.pruning.gettype.application.inputport.GetTypeInputPort;
 import co.edu.uco.treepruning.features.pruning.gettype.application.inputport.dto.GetTypeDTO;
+import co.edu.uco.treepruning.features.pruning.gettype.application.inputport.impl.mapper.GetTypeDTOMapper;
 import co.edu.uco.treepruning.features.pruning.gettype.application.usecase.GetTypeUseCase;
 
 @Service

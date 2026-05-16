@@ -1,6 +1,7 @@
 package co.edu.uco.treepruning.features.pruning.gettree.application.usecase.impl;
 
 import co.edu.uco.treepruning.features.pruning.gettree.application.usecase.domain.GetTreeDomain;
+import co.edu.uco.treepruning.features.pruning.gettree.application.usecase.impl.mapper.GetTreeDomainMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.FamilyEntity;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.ProgrammingEntity;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.SectorEntity;

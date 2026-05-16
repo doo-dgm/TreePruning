@@ -6,6 +6,7 @@ import co.edu.uco.treepruning.features.pruning
         .gettree.application.usecase.GetTreeUseCase;
 import co.edu.uco.treepruning.features.pruning
         .gettree.application.usecase.domain.GetTreeDomain;
+import co.edu.uco.treepruning.features.pruning.gettree.application.usecase.impl.mapper.GetTreeDomainMapper;
 import co.edu.uco.treepruning.infrastructure.persistence
         .repository.TreeRepository;
 

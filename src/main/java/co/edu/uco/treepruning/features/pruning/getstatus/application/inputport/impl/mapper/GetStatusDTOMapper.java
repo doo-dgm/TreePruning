@@ -1,4 +1,4 @@
-package co.edu.uco.treepruning.features.pruning.getstatus.application.inputport.impl;
+package co.edu.uco.treepruning.features.pruning.getstatus.application.inputport.impl.mapper;
 
 import java.util.List;
 import org.mapstruct.Mapper;

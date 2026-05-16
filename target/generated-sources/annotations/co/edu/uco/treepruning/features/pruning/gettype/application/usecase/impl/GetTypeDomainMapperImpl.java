@@ -1,6 +1,7 @@
 package co.edu.uco.treepruning.features.pruning.gettype.application.usecase.impl;
 
 import co.edu.uco.treepruning.features.pruning.gettype.application.usecase.domain.GetTypeDomain;
+import co.edu.uco.treepruning.features.pruning.gettype.application.usecase.impl.mapper.GetTypeDomainMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.TypeEntity;
 import java.util.UUID;
 import javax.annotation.processing.Generated;

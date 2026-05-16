@@ -1,6 +1,7 @@
 package co.edu.uco.treepruning.features.pruning.gettype.application.inputport.impl;
 
 import co.edu.uco.treepruning.features.pruning.gettype.application.inputport.dto.GetTypeDTO;
+import co.edu.uco.treepruning.features.pruning.gettype.application.inputport.impl.mapper.GetTypeDTOMapper;
 import co.edu.uco.treepruning.features.pruning.gettype.application.usecase.domain.GetTypeDomain;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,7 @@
 package co.edu.uco.treepruning.features.pruning.getquadrille.application.usecase.impl;
 
 import co.edu.uco.treepruning.features.pruning.getquadrille.application.usecase.domain.GetQuadrilleDomain;
+import co.edu.uco.treepruning.features.pruning.getquadrille.application.usecase.impl.mapper.GetQuadrilleDomainMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.ManagerEntity;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.QuadrilleEntity;
 import java.util.UUID;

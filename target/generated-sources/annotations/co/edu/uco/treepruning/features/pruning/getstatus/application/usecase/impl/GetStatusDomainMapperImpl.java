@@ -1,6 +1,7 @@
 package co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.impl;
 
 import co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.domain.GetStatusDomain;
+import co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.impl.mapper.GetStatusDomainMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.StatusEntity;
 import java.util.UUID;
 import javax.annotation.processing.Generated;

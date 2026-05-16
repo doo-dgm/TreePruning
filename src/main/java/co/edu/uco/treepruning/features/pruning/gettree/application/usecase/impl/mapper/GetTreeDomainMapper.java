@@ -1,4 +1,4 @@
-package co.edu.uco.treepruning.features.pruning.gettree.application.usecase.impl;
+package co.edu.uco.treepruning.features.pruning.gettree.application.usecase.impl.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

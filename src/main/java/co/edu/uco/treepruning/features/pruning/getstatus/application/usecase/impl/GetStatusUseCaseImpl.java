@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.GetStatusUseCase;
 import co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.domain.GetStatusDomain;
+import co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.impl.mapper.GetStatusDomainMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.StatusRepository;
 
 @Service

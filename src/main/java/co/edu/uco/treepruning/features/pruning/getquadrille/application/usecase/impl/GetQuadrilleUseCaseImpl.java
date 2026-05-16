@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import co.edu.uco.treepruning.features.pruning.getquadrille.application.usecase.GetQuadrilleUseCase;
 import co.edu.uco.treepruning.features.pruning.getquadrille.application.usecase.domain.GetQuadrilleDomain;
+import co.edu.uco.treepruning.features.pruning.getquadrille.application.usecase.impl.mapper.GetQuadrilleDomainMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.QuadrilleRepository;
 
 @Service

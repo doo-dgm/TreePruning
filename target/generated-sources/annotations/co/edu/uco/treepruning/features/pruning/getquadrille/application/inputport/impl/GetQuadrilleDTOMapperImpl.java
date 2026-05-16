@@ -1,6 +1,7 @@
 package co.edu.uco.treepruning.features.pruning.getquadrille.application.inputport.impl;
 
 import co.edu.uco.treepruning.features.pruning.getquadrille.application.inputport.dto.GetQuadrilleDTO;
+import co.edu.uco.treepruning.features.pruning.getquadrille.application.inputport.impl.mapper.GetQuadrilleDTOMapper;
 import co.edu.uco.treepruning.features.pruning.getquadrille.application.usecase.domain.GetQuadrilleDomain;
 import java.util.ArrayList;
 import java.util.List;

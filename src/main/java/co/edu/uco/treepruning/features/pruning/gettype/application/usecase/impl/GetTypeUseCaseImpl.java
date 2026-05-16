@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import co.edu.uco.treepruning.features.pruning.gettype.application.usecase.GetTypeUseCase;
 import co.edu.uco.treepruning.features.pruning.gettype.application.usecase.domain.GetTypeDomain;
+import co.edu.uco.treepruning.features.pruning.gettype.application.usecase.impl.mapper.GetTypeDomainMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.TypeRepository;
 
 @Service

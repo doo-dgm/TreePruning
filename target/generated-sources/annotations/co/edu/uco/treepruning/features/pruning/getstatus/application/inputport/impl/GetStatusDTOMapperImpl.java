@@ -1,6 +1,7 @@
 package co.edu.uco.treepruning.features.pruning.getstatus.application.inputport.impl;
 
 import co.edu.uco.treepruning.features.pruning.getstatus.application.inputport.dto.GetStatusDTO;
+import co.edu.uco.treepruning.features.pruning.getstatus.application.inputport.impl.mapper.GetStatusDTOMapper;
 import co.edu.uco.treepruning.features.pruning.getstatus.application.usecase.domain.GetStatusDomain;
 import java.util.ArrayList;
 import java.util.List;

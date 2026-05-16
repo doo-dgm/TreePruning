@@ -1,4 +1,4 @@
-package co.edu.uco.treepruning.features.pruning.getquadrille.application.usecase.impl;
+package co.edu.uco.treepruning.features.pruning.getquadrille.application.usecase.impl.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
