@@ -29,13 +29,13 @@ public class StateEntity {
 		setCountry(country);
 	}
 	
-	private UUID getId() {
+	public UUID getId() {
 		return id;
 	}
-	private String getName() {
+	public String getName() {
 		return name;
 	}
-	private CountryEntity getCountry() {
+	public CountryEntity getCountry() {
 		return country;
 	}
 	

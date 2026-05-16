@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-05-16T00:07:08-0500",
+    date = "2026-05-16T12:28:52-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 26.0.1 (Oracle Corporation)"
 )
 @Component
@@ -40,6 +40,9 @@ public class StatusEntityMapperImpl implements StatusEntityMapper {
         }
 
         StatusEntity statusEntity = new StatusEntity();
+
+        statusEntity.setId( jpaEntity.getId() );
+        statusEntity.setName( jpaEntity.getName() );
 
         return statusEntity;
     }

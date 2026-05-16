@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-05-16T00:07:08-0500",
+    date = "2026-05-16T12:28:51-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 26.0.1 (Oracle Corporation)"
 )
 @Component
@@ -64,6 +64,17 @@ public class TreeEntityMapperImpl implements TreeEntityMapper {
         }
 
         TreeEntity treeEntity = new TreeEntity();
+
+        treeEntity.setId( jpaEntity.getId() );
+        if ( jpaEntity.getLongitude() != null ) {
+            treeEntity.setLongitude( jpaEntity.getLongitude().toString() );
+        }
+        if ( jpaEntity.getLatitude() != null ) {
+            treeEntity.setLatitude( jpaEntity.getLatitude().toString() );
+        }
+        treeEntity.setFamily( familyEntityMapper.toEntity( jpaEntity.getFamily() ) );
+        treeEntity.setSector( sectorEntityMapper.toEntity( jpaEntity.getSector() ) );
+        treeEntity.setProgramming( programmingEntityMapper.toEntity( jpaEntity.getProgramming() ) );
 
         return treeEntity;
     }

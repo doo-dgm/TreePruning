@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-05-16T00:07:08-0500",
+    date = "2026-05-16T12:28:52-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 26.0.1 (Oracle Corporation)"
 )
 @Component
@@ -65,6 +65,14 @@ public class PQREntityMapperImpl implements PQREntityMapper {
         }
 
         PQREntity pQREntity = new PQREntity();
+
+        pQREntity.setId( jpaEntity.getId() );
+        pQREntity.setDate( jpaEntity.getDate() );
+        pQREntity.setStatus( statusEntityMapper.toEntity( jpaEntity.getStatus() ) );
+        pQREntity.setRisk( riskEntityMapper.toEntity( jpaEntity.getRisk() ) );
+        pQREntity.setSector( sectorEntityMapper.toEntity( jpaEntity.getSector() ) );
+        pQREntity.setPerson( personEntityMapper.toEntity( jpaEntity.getPerson() ) );
+        pQREntity.setPhotographicRecordPath( jpaEntity.getPhotographicRecordPath() );
 
         return pQREntity;
     }

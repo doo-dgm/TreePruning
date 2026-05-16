@@ -1,5 +1,6 @@
 package co.edu.uco.treepruning.infrastructure.persistence.repository.adapter.sql.jpa;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,5 +54,10 @@ public class PruningJPARepositoryAdapter implements PruningRepository {
     public List<PruningEntity> findByFilter(PruningEntity filter) {
         // TODO
         return List.of();
+    }
+
+    @Override
+    public boolean existsByTreeAndPlannedDate(UUID treeId, LocalDate plannedDate) {
+        return repository.existsByTree_IdAndPlannedDate(treeId, plannedDate);
     }
 }

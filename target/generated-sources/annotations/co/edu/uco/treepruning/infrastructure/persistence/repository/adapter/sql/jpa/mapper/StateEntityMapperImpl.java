@@ -7,15 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.annotation.processing.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-05-16T00:07:08-0500",
+    date = "2026-05-16T12:28:52-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 26.0.1 (Oracle Corporation)"
 )
 @Component
 public class StateEntityMapperImpl implements StateEntityMapper {
+
+    @Autowired
+    private CountryEntityMapper countryEntityMapper;
 
     @Override
     public StateJPAEntity toJPA(StateEntity entity) {
@@ -26,6 +30,10 @@ public class StateEntityMapperImpl implements StateEntityMapper {
         UUID id = null;
         String name = null;
         CountryJPAEntity country = null;
+
+        id = entity.getId();
+        name = entity.getName();
+        country = countryEntityMapper.toJPA( entity.getCountry() );
 
         StateJPAEntity stateJPAEntity = new StateJPAEntity( id, name, country );
 
@@ -39,6 +47,10 @@ public class StateEntityMapperImpl implements StateEntityMapper {
         }
 
         StateEntity stateEntity = new StateEntity();
+
+        stateEntity.setId( jpaEntity.getId() );
+        stateEntity.setName( jpaEntity.getName() );
+        stateEntity.setCountry( countryEntityMapper.toEntity( jpaEntity.getCountry() ) );
 
         return stateEntity;
     }

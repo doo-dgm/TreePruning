@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-05-16T00:07:09-0500",
+    date = "2026-05-16T12:28:52-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 26.0.1 (Oracle Corporation)"
 )
 @Component
@@ -74,6 +74,17 @@ public class PruningEntityMapperImpl implements PruningEntityMapper {
         }
 
         PruningEntity pruningEntity = new PruningEntity();
+
+        pruningEntity.setId( jpaEntity.getId() );
+        pruningEntity.setStatus( statusEntityMapper.toEntity( jpaEntity.getStatus() ) );
+        pruningEntity.setPlannedDate( jpaEntity.getPlannedDate() );
+        pruningEntity.setExecutedDate( jpaEntity.getExecutedDate() );
+        pruningEntity.setTree( treeEntityMapper.toEntity( jpaEntity.getTree() ) );
+        pruningEntity.setQuadrille( quadrilleEntityMapper.toEntity( jpaEntity.getQuadrille() ) );
+        pruningEntity.setType( typeEntityMapper.toEntity( jpaEntity.getType() ) );
+        pruningEntity.setPqr( pQREntityMapper.toEntity( jpaEntity.getPqr() ) );
+        pruningEntity.setPhotographicRecordPath( jpaEntity.getPhotographicRecordPath() );
+        pruningEntity.setObservations( jpaEntity.getObservations() );
 
         return pruningEntity;
     }

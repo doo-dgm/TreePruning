@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-05-16T00:07:08-0500",
+    date = "2026-05-16T12:28:52-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 26.0.1 (Oracle Corporation)"
 )
 @Component
@@ -70,6 +70,21 @@ public class PersonEntityMapperImpl implements PersonEntityMapper {
         }
 
         PersonEntity personEntity = new PersonEntity();
+
+        personEntity.setId( jpaEntity.getId() );
+        personEntity.setFirstName( jpaEntity.getFirstName() );
+        personEntity.setSecondName( jpaEntity.getSecondName() );
+        personEntity.setFirstLastName( jpaEntity.getFirstLastName() );
+        personEntity.setSecondLastName( jpaEntity.getSecondLastName() );
+        personEntity.setDocument( documentEntityMapper.toEntity( jpaEntity.getDocument() ) );
+        personEntity.setDocumentNumber( jpaEntity.getDocumentNumber() );
+        personEntity.setBirthDate( jpaEntity.getBirthDate() );
+        personEntity.setAddress( jpaEntity.getAddress() );
+        personEntity.setEmail( jpaEntity.getEmail() );
+        personEntity.setEmailConfirmed( jpaEntity.isEmailConfirmed() );
+        personEntity.setPhone( jpaEntity.getPhone() );
+        personEntity.setPhoneConfirmed( jpaEntity.isPhoneConfirmed() );
+        personEntity.setAge( jpaEntity.getAge() );
 
         return personEntity;
     }
