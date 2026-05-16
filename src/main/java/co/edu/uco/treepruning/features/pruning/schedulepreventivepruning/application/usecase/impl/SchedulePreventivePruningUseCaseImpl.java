@@ -1,20 +1,14 @@
 package co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.impl;
 
 import org.springframework.stereotype.Service;
-
+import co.edu.uco.treepruning.features.pruning.getquadrillebyid.application.usecase.GetQuadrilleByIdUseCase;
+import co.edu.uco.treepruning.features.pruning.getstatusbyid.application.usecase.GetStatusByIdUseCase;
+import co.edu.uco.treepruning.features.pruning.gettreebyid.application.usecase.GetTreeByIdUseCase;
+import co.edu.uco.treepruning.features.pruning.gettypebyid.application.usecase.GetTypeByIdUseCase;
 import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.SchedulePreventivePruningUseCase;
 import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.domain.SchedulePreventivePruningDomain;
-import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.rules.PruningTypeNotFoundForPruningException;
-import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.rules.QuadrilleNotFoundForPruningException;
-import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.rules.StatusNotFoundForPruningException;
-import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.rules.TreeNotFoundForPruningException;
+import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.mapper.SchedulePreventivePruningDomainMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.PruningRepository;
-import co.edu.uco.treepruning.infrastructure.persistence.repository.QuadrilleRepository;
-import co.edu.uco.treepruning.infrastructure.persistence.repository.StatusRepository;
-import co.edu.uco.treepruning.infrastructure.persistence.repository.TreeRepository;
-import co.edu.uco.treepruning.infrastructure.persistence.repository.TypeRepository;
-import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.PQREntity;
-import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.PruningEntity;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.QuadrilleEntity;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.StatusEntity;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.TreeEntity;
@@ -24,60 +18,46 @@ import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.TypeE
 public class SchedulePreventivePruningUseCaseImpl
         implements SchedulePreventivePruningUseCase {
 
+    private final GetTreeByIdUseCase getTreeByIdUseCase;
+    private final GetQuadrilleByIdUseCase getQuadrilleByIdUseCase;
+    private final GetTypeByIdUseCase getTypeByIdUseCase;
+    private final GetStatusByIdUseCase getStatusByIdUseCase;
     private final PruningRepository pruningRepository;
-    private final TreeRepository treeRepository;
-    private final QuadrilleRepository quadrilleRepository;
-    private final TypeRepository typeRepository;
-    private final StatusRepository statusRepository;
+    private final SchedulePreventivePruningDomainMapper mapper;
 
     public SchedulePreventivePruningUseCaseImpl(
+            GetTreeByIdUseCase getTreeByIdUseCase,
+            GetQuadrilleByIdUseCase getQuadrilleByIdUseCase,
+            GetTypeByIdUseCase getTypeByIdUseCase,
+            GetStatusByIdUseCase getStatusByIdUseCase,
             PruningRepository pruningRepository,
-            TreeRepository treeRepository,
-            QuadrilleRepository quadrilleRepository,
-            TypeRepository typeRepository,
-            StatusRepository statusRepository) {
+            SchedulePreventivePruningDomainMapper mapper) {
+        this.getTreeByIdUseCase = getTreeByIdUseCase;
+        this.getQuadrilleByIdUseCase = getQuadrilleByIdUseCase;
+        this.getTypeByIdUseCase = getTypeByIdUseCase;
+        this.getStatusByIdUseCase = getStatusByIdUseCase;
         this.pruningRepository = pruningRepository;
-        this.treeRepository = treeRepository;
-        this.quadrilleRepository = quadrilleRepository;
-        this.typeRepository = typeRepository;
-        this.statusRepository = statusRepository;
+        this.mapper = mapper;
     }
 
     @Override
     public Void execute(SchedulePreventivePruningDomain data) {
 
-        TreeEntity tree = treeRepository.findById(data.getTree());
-        if (tree == null) {
-            throw TreeNotFoundForPruningException.create(data.getTree());
-        }
+        TreeEntity tree = getTreeByIdUseCase
+                .execute(data.getTree());
 
-        QuadrilleEntity quadrille = quadrilleRepository.findById(data.getQuadrille());
-        if (quadrille == null) {
-            throw QuadrilleNotFoundForPruningException.create(data.getQuadrille());
-        }
+        QuadrilleEntity quadrille = getQuadrilleByIdUseCase
+                .execute(data.getQuadrille());
 
-        TypeEntity type = typeRepository.findById(data.getType());
-        if (type == null) {
-            throw PruningTypeNotFoundForPruningException.create(data.getType());
-        }
+        TypeEntity type = getTypeByIdUseCase
+                .execute(data.getType());
 
-        StatusEntity status = statusRepository.findById(data.getStatus());
-        if (status == null) {
-            throw StatusNotFoundForPruningException.create(data.getStatus());
-        }
+        StatusEntity status = getStatusByIdUseCase
+                .execute(data.getStatus());
 
-        pruningRepository.create(new PruningEntity(
-                data.getId(),
-                status,
-                data.getPlannedDate(),
-                data.getExecutedDate(),
-                tree,
-                quadrille,
-                type,
-                new PQREntity(),
-                data.getPhotographicRecordPath(),
-                data.getObservations()
-        ));
+        pruningRepository.create(
+                mapper.toEntity(data, status, tree,
+                        quadrille, type));
 
         return null;
     }
