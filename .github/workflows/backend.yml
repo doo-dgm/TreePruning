@@ -1,0 +1,126 @@
+name: Backend CI/CD
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'backend/**'
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/tree-pruning-backend
+
+jobs:
+  # ── CI + build de la imagen ──────────────────────────────────────────────────
+  # En PR: solo construye (verifica que compila). En main: construye y publica.
+  build-and-push:
+    name: Build & Push Docker image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        if: github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: ${{ github.ref == 'refs/heads/main' }}
+          tags: |
+            ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ── Deploy al servidor Azure (solo push a main) ──────────────────────────────
+  deploy:
+    name: Deploy to Azure VM
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Fetch secrets from Infisical
+        uses: Infisical/secrets-action@v1.0.9
+        with:
+          method: "universal"
+          client-id: ${{ secrets.INFISICAL_CLIENT_ID }}
+          client-secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}
+          project-slug: "tree-pruning-fb-tx"   # mismo proyecto Infisical que el frontend
+          env-slug: "dev"
+          export-type: "env"
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_ACTOR: ${{ github.actor }}
+          REPO_OWNER: ${{ github.repository_owner }}
+        with:
+          host: ${{ secrets.AZURE_HOST }}
+          username: ${{ secrets.AZURE_USER }}
+          key: ${{ secrets.AZURE_SSH_KEY }}
+          envs: POSTGRES_USER,POSTGRES_PASSWORD,GH_TOKEN,GH_ACTOR,REPO_OWNER
+          script: |
+            mkdir -p ~/treepruning
+
+            # Detectar el nombre del contenedor Postgres en la red Docker del proyecto
+            POSTGRES_HOST=$(docker network inspect tree-pruning_treepruning-net \
+              --format '{{range .Containers}}{{if .Name}}{{.Name}} {{end}}{{end}}' \
+              | tr ' ' '\n' | grep -i postgres | head -1)
+
+            if [ -z "$POSTGRES_HOST" ]; then
+              echo "ERROR: No se encontró contenedor Postgres en tree-pruning_treepruning-net"
+              docker network inspect tree-pruning_treepruning-net --format '{{range .Containers}}{{.Name}} {{end}}'
+              exit 1
+            fi
+
+            echo "==> Postgres encontrado en: $POSTGRES_HOST"
+
+            cat > ~/treepruning/.env.prod << ENVEOF
+            POSTGRES_HOST=$POSTGRES_HOST
+            POSTGRES_USER=$POSTGRES_USER
+            POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+            JPA_SHOW_SQL=false
+            JPA_FORMAT_SQL=false
+            SERVER_PORT=8080
+            ENVEOF
+
+            echo "$GH_TOKEN" | docker login ghcr.io -u "$GH_ACTOR" --password-stdin
+            docker pull ghcr.io/$REPO_OWNER/tree-pruning-backend:latest
+
+            docker stop tp-backend || true
+            docker rm   tp-backend || true
+
+            docker run -d \
+              --name tp-backend \
+              --restart unless-stopped \
+              --env-file ~/treepruning/.env.prod \
+              --network tree-pruning_treepruning-net \
+              --label "traefik.enable=true" \
+              --label "traefik.http.routers.backend.rule=Host(\`api.treepruning.org\`)" \
+              --label "traefik.http.routers.backend.entrypoints=websecure" \
+              --label "traefik.http.routers.backend.tls.certresolver=cloudflare" \
+              --label "traefik.http.services.backend.loadbalancer.server.port=8080" \
+              ghcr.io/$REPO_OWNER/tree-pruning-backend:latest
+
+            docker image prune -f

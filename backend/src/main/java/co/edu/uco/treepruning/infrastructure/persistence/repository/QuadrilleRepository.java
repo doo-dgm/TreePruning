@@ -6,8 +6,5 @@ import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.Quadr
 
 public interface QuadrilleRepository {
 	
-    List<QuadrilleEntity> findAll();
-    
-    QuadrilleEntity findById(UUID id);
-    
+    List<QuadrilleEntity> findByFilter(UUID id, String quadrilleName, UUID managerId);
 }

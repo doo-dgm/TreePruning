@@ -2,9 +2,7 @@ package co.edu.uco.treepruning.infrastructure.persistence.repository.adapter.sql
 
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.stereotype.Repository;
-
 import co.edu.uco.treepruning.infrastructure.persistence.repository.TreeRepository;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.adapter.sql.jpa.mapper.TreeEntityMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.TreeEntity;
@@ -23,14 +21,7 @@ public class TreeJPARepositoryAdapter implements TreeRepository {
     }
 
     @Override
-    public List<TreeEntity> findAll() {
-        return mapper.toEntityList(repository.findAll());
-    }
-
-    @Override
-    public TreeEntity findById(final UUID id) {
-        return repository.findById(id)
-                .map(mapper::toEntity)
-                .orElse(null);
+    public List<TreeEntity> findByFilter(UUID id, UUID familyId, UUID sectorId) {
+        return mapper.toEntityList(repository.findByFilter(id, familyId, sectorId));
     }
 }

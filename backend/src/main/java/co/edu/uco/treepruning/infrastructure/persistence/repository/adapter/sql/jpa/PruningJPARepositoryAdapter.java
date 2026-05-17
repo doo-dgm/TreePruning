@@ -3,9 +3,7 @@ package co.edu.uco.treepruning.infrastructure.persistence.repository.adapter.sql
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.stereotype.Repository;
-
 import co.edu.uco.treepruning.infrastructure.persistence.repository.PruningRepository;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.adapter.sql.jpa.mapper.PruningEntityMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.PruningEntity;
@@ -39,21 +37,11 @@ public class PruningJPARepositoryAdapter implements PruningRepository {
     }
 
     @Override
-    public PruningEntity findById(final UUID id) {
-        return repository.findById(id)
-                .map(mapper::toEntity)
-                .orElse(null);
-    }
-
-    @Override
-    public List<PruningEntity> findAll() {
-        return mapper.toEntityList(repository.findAll());
-    }
-
-    @Override
-    public List<PruningEntity> findByFilter(final PruningEntity filter) {
-        // TODO
-        return List.of();
+    public List<PruningEntity> findByFilter(UUID id, UUID statusId, UUID treeId,
+            UUID quadrilleId, UUID typeId, LocalDate plannedDate) {
+        return mapper.toEntityList(
+            repository.findByFilter(id, statusId, treeId, quadrilleId, typeId, plannedDate)
+        );
     }
 
     @Override

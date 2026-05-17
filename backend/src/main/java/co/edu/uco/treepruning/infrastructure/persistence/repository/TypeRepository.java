@@ -6,7 +6,5 @@ import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.TypeE
 
 public interface TypeRepository {
 	
-    List<TypeEntity> findAll();
-    
-    TypeEntity findById(UUID id);
+    List<TypeEntity> findByFilter(UUID id, String name);
 }

@@ -2,9 +2,7 @@ package co.edu.uco.treepruning.infrastructure.persistence.repository.adapter.sql
 
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.stereotype.Repository;
-
 import co.edu.uco.treepruning.infrastructure.persistence.repository.QuadrilleRepository;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.adapter.sql.jpa.mapper.QuadrilleEntityMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.QuadrilleEntity;
@@ -23,14 +21,7 @@ public class QuadrilleJPARepositoryAdapter implements QuadrilleRepository {
     }
 
     @Override
-    public List<QuadrilleEntity> findAll() {
-        return mapper.toEntityList(repository.findAll());
-    }
-
-    @Override
-    public QuadrilleEntity findById(UUID id) {
-        return repository.findById(id)
-                .map(mapper::toEntity)
-                .orElse(null);
+    public List<QuadrilleEntity> findByFilter(UUID id, String quadrilleName, UUID managerId) {
+        return mapper.toEntityList(repository.findByFilter(id, quadrilleName, managerId));
     }
 }

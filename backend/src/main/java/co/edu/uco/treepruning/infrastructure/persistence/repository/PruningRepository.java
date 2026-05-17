@@ -13,11 +13,7 @@ public interface PruningRepository {
 
     void delete(UUID id);
 
-    PruningEntity findById(UUID id);
-
-    List<PruningEntity> findAll();
-
-    List<PruningEntity> findByFilter(PruningEntity filter);
+    List<PruningEntity> findByFilter(UUID id, UUID statusId, UUID treeId, UUID quadrilleId, UUID typeId, LocalDate plannedDate);
 
     boolean existsByTreeAndPlannedDate(UUID treeId, LocalDate plannedDate);
 }

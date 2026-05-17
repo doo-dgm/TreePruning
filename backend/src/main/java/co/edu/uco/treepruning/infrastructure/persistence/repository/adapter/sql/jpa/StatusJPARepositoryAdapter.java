@@ -2,9 +2,7 @@ package co.edu.uco.treepruning.infrastructure.persistence.repository.adapter.sql
 
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.stereotype.Repository;
-
 import co.edu.uco.treepruning.infrastructure.persistence.repository.StatusRepository;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.adapter.sql.jpa.mapper.StatusEntityMapper;
 import co.edu.uco.treepruning.infrastructure.persistence.repository.entity.StatusEntity;
@@ -23,14 +21,7 @@ public class StatusJPARepositoryAdapter implements StatusRepository {
     }
 
     @Override
-    public List<StatusEntity> findAll() {
-        return mapper.toEntityList(repository.findAll());
-    }
-
-    @Override
-    public StatusEntity findById(UUID id) {
-        return repository.findById(id)
-                .map(mapper::toEntity)
-                .orElse(null);
+    public List<StatusEntity> findByFilter(UUID id, String name) {
+        return mapper.toEntityList(repository.findByFilter(id, name));
     }
 }
