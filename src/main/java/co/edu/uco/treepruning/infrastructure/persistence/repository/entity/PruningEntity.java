@@ -83,42 +83,42 @@ public class PruningEntity {
     	return observations; 
     	}
 
-    public void setId(UUID id) {
+    public void setId(final UUID id) {
         this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
-    public void setStatus(StatusEntity status) {
+    public void setStatus(final StatusEntity status) {
         this.status = ObjectHelper.getDefault(
                 status, new StatusEntity());
     }
-    public void setPlannedDate(LocalDate plannedDate) {
+    public void setPlannedDate(final LocalDate plannedDate) {
         this.plannedDate = DateHelper.getDateHelper()
                 .getDefault(plannedDate);
     }
-    public void setExecutedDate(LocalDate executedDate) {
+    public void setExecutedDate(final LocalDate executedDate) {
         this.executedDate = DateHelper.getDateHelper()
                 .getDefault(executedDate);
     }
-    public void setTree(TreeEntity tree) {
+    public void setTree(final TreeEntity tree) {
         this.tree = ObjectHelper.getDefault(
                 tree, new TreeEntity());
     }
-    public void setQuadrille(QuadrilleEntity quadrille) {
+    public void setQuadrille(final QuadrilleEntity quadrille) {
         this.quadrille = ObjectHelper.getDefault(
                 quadrille, new QuadrilleEntity());
     }
-    public void setType(TypeEntity type) {
+    public void setType(final TypeEntity type) {
         this.type = ObjectHelper.getDefault(
                 type, new TypeEntity());
     }
-    public void setPqr(PQREntity pqr) {
+    public void setPqr(final PQREntity pqr) {
         this.pqr = ObjectHelper.getDefault(pqr, new PQREntity());
     }
     public void setPhotographicRecordPath(
-            String photographicRecordPath) {
+    		final String photographicRecordPath) {
         this.photographicRecordPath = TextHelper
                 .getDefaultWithTrim(photographicRecordPath);
     }
-    public void setObservations(String observations) {
+    public void setObservations(final String observations) {
         this.observations = TextHelper
                 .getDefaultWithTrim(observations);
     }

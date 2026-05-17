@@ -24,22 +24,22 @@ public class PruningJPARepositoryAdapter implements PruningRepository {
     }
 
     @Override
-    public void create(PruningEntity entity) {
+    public void create(final PruningEntity entity) {
         repository.save(mapper.toJPA(entity));
     }
 
     @Override
-    public void update(UUID id, PruningEntity entity) {
+    public void update(final UUID id, final PruningEntity entity) {
         // TODO
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(final UUID id) {
         repository.deleteById(id);
     }
 
     @Override
-    public PruningEntity findById(UUID id) {
+    public PruningEntity findById(final UUID id) {
         return repository.findById(id)
                 .map(mapper::toEntity)
                 .orElse(null);
@@ -51,13 +51,13 @@ public class PruningJPARepositoryAdapter implements PruningRepository {
     }
 
     @Override
-    public List<PruningEntity> findByFilter(PruningEntity filter) {
+    public List<PruningEntity> findByFilter(final PruningEntity filter) {
         // TODO
         return List.of();
     }
 
     @Override
-    public boolean existsByTreeAndPlannedDate(UUID treeId, LocalDate plannedDate) {
+    public boolean existsByTreeAndPlannedDate(final UUID treeId, final LocalDate plannedDate) {
         return repository.existsByTree_IdAndPlannedDate(treeId, plannedDate);
     }
 }

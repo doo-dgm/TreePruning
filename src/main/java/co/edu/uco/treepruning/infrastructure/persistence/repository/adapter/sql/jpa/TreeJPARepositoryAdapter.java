@@ -28,7 +28,7 @@ public class TreeJPARepositoryAdapter implements TreeRepository {
     }
 
     @Override
-    public TreeEntity findById(UUID id) {
+    public TreeEntity findById(final UUID id) {
         return repository.findById(id)
                 .map(mapper::toEntity)
                 .orElse(null);

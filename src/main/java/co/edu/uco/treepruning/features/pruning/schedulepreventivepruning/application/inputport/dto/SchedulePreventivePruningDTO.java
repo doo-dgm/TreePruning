@@ -9,7 +9,7 @@ import co.edu.uco.treepruning.crosscutting.helper.TextHelper;
 import co.edu.uco.treepruning.crosscutting.helper.UUIDHelper;
 
 public final class SchedulePreventivePruningDTO {
-
+	
     private UUID status;
     private LocalDate plannedDate;
     private LocalDate executedDate;
@@ -47,28 +47,28 @@ public final class SchedulePreventivePruningDTO {
     public String getPhotographicRecordPath() { return photographicRecordPath; }
     public String getObservations() { return observations; }
 
-    private void setStatus(UUID status) {
+    private void setStatus(final UUID status) {
         this.status = UUIDHelper.getUUIDHelper().getDefault(status);
     }
-    private void setPlannedDate(LocalDate plannedDate) {
+    private void setPlannedDate(final LocalDate plannedDate) {
         this.plannedDate = DateHelper.getDateHelper().getDefault(plannedDate);
     }
-    private void setExecutedDate(LocalDate executedDate) {
+    private void setExecutedDate(final LocalDate executedDate) {
         this.executedDate = DateHelper.getDateHelper().getDefault(executedDate);
     }
-    private void setTree(UUID tree) {
+    private void setTree(final UUID tree) {
         this.tree = UUIDHelper.getUUIDHelper().getDefault(tree);
     }
-    private void setQuadrille(UUID quadrille) {
+    private void setQuadrille(final UUID quadrille) {
         this.quadrille = UUIDHelper.getUUIDHelper().getDefault(quadrille);
     }
-    private void setType(UUID type) {
+    private void setType(final UUID type) {
         this.type = UUIDHelper.getUUIDHelper().getDefault(type);
     }
-    private void setPhotographicRecordPath(String photographicRecordPath) {
+    private void setPhotographicRecordPath(final String photographicRecordPath) {
         this.photographicRecordPath = TextHelper.getDefaultWithTrim(photographicRecordPath);
     }
-    private void setObservations(String observations) {
+    private void setObservations(final String observations) {
         this.observations = TextHelper.getDefaultWithTrim(observations);
     }
 }

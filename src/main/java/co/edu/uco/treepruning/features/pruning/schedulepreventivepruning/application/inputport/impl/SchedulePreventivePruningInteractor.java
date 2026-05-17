@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.inputport.SchedulePreventivePruningInputPort;
 import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.inputport.dto.SchedulePreventivePruningDTO;
 import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.inputport.dto.validator.SchedulePreventivePruningDTOValidator;
+import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.inputport.mapper.SchedulePreventivePruningDTOMapper;
 import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.SchedulePreventivePruningUseCase;
 import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.domain.SchedulePreventivePruningDomain;
 
@@ -13,32 +14,28 @@ import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.applica
 public class SchedulePreventivePruningInteractor implements SchedulePreventivePruningInputPort {
 
     private final SchedulePreventivePruningUseCase useCase;
+    private SchedulePreventivePruningDTOMapper mapper;
 
     public SchedulePreventivePruningInteractor(
-            SchedulePreventivePruningUseCase useCase) {
+            SchedulePreventivePruningUseCase useCase, SchedulePreventivePruningDTOMapper mapper) {
         this.useCase = useCase;
+        this.mapper = mapper;
     }
 
     @Override
     public Void execute(SchedulePreventivePruningDTO data) {
-        SchedulePreventivePruningDTOValidator.validateStatus(data.getStatus());
-        SchedulePreventivePruningDTOValidator.validatePlannedDate(data.getPlannedDate());
-        SchedulePreventivePruningDTOValidator.validateExecutedDate(data.getExecutedDate(),data.getPlannedDate());
-        SchedulePreventivePruningDTOValidator.validateTree(data.getTree());
-        SchedulePreventivePruningDTOValidator.validateQuadrille(data.getQuadrille());
-        SchedulePreventivePruningDTOValidator.validateType(data.getType());
-        SchedulePreventivePruningDTOValidator.validatePhotographicRecordPath( data.getPhotographicRecordPath());
-        SchedulePreventivePruningDTOValidator.validateObservations(data.getObservations());
+    	
+    	SchedulePreventivePruningDomain domain = mapper.toDomain(data);
+    	
+        SchedulePreventivePruningDTOValidator.validateStatus(domain.getStatus());
+        SchedulePreventivePruningDTOValidator.validatePlannedDate(domain.getPlannedDate());
+        SchedulePreventivePruningDTOValidator.validateExecutedDate(domain.getExecutedDate(),domain.getPlannedDate());
+        SchedulePreventivePruningDTOValidator.validateTree(domain.getTree());
+        SchedulePreventivePruningDTOValidator.validateQuadrille(domain.getQuadrille());
+        SchedulePreventivePruningDTOValidator.validateType(domain.getType());
+        SchedulePreventivePruningDTOValidator.validatePhotographicRecordPath( domain.getPhotographicRecordPath());
+        SchedulePreventivePruningDTOValidator.validateObservations(domain.getObservations());
 
-        return useCase.execute(new SchedulePreventivePruningDomain(
-                data.getStatus(),
-                data.getPlannedDate(),
-                data.getExecutedDate(),
-                data.getTree(),
-                data.getQuadrille(),
-                data.getType(),
-                data.getPhotographicRecordPath(),
-                data.getObservations()
-        ));
+        return useCase.execute(domain);
     }
 }

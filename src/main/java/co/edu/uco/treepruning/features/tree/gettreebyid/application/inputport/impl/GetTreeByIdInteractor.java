@@ -24,7 +24,7 @@ public class GetTreeByIdInteractor implements GetTreeByIdInputPort {
     }
 
     @Override
-    public GetTreeByIdDTO execute(UUID id) {
+    public GetTreeByIdDTO execute(final UUID id) {
         return dtoMapper.toDTO(domainMapper.toDomain(useCase.execute(id)));
     }
 }

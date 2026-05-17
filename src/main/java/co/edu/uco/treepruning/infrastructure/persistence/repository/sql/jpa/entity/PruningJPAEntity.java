@@ -2,6 +2,10 @@ package co.edu.uco.treepruning.infrastructure.persistence.repository.sql.jpa.ent
 
 import java.time.LocalDate;
 import java.util.UUID;
+
+import co.edu.uco.treepruning.crosscutting.helper.DateHelper;
+import co.edu.uco.treepruning.crosscutting.helper.TextHelper;
+import co.edu.uco.treepruning.crosscutting.helper.UUIDHelper;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -99,35 +103,35 @@ public class PruningJPAEntity {
     	return observations; 
     	}
 
-    private void setId(UUID id) {
-    	this.id = id; 
+    private void setId(final UUID id) {
+    	this.id = UUIDHelper.getUUIDHelper().getDefault(id); 
     	}
-    private void setStatus(StatusJPAEntity status) {
+    private void setStatus(final StatusJPAEntity status) {
         this.status = status; 
         }
-    private void setPlannedDate(LocalDate plannedDate) {
-        this.plannedDate = plannedDate;
+    private void setPlannedDate(final LocalDate plannedDate) {
+        this.plannedDate = DateHelper.getDateHelper().getDefault(plannedDate);
         }
-    private void setExecutedDate(LocalDate executedDate) {
-        this.executedDate = executedDate; 
+    private void setExecutedDate(final LocalDate executedDate) {
+        this.executedDate = DateHelper.getDateHelper().getDefault(executedDate); 
         }
-    private void setTree(TreeJPAEntity tree) { 
+    private void setTree(final TreeJPAEntity tree) { 
     	this.tree = tree; 
     	}
-    private void setQuadrille(QuadrilleJPAEntity quadrille) {
+    private void setQuadrille(final QuadrilleJPAEntity quadrille) {
         this.quadrille = quadrille;
         }
-    private void setType(TypeJPAEntity type) { 
+    private void setType(final TypeJPAEntity type) { 
     	this.type = type; 
     	}
-    private void setPqr(PQRJPAEntity pqr) { 
+    private void setPqr(final PQRJPAEntity pqr) { 
     	this.pqr = pqr;
     	}
     private void setPhotographicRecordPath(
-            String photographicRecordPath) {
-        this.photographicRecordPath = photographicRecordPath;
+    		final String photographicRecordPath) {
+        this.photographicRecordPath = TextHelper.getDefault(photographicRecordPath);
         }
-    private void setObservations(String observations) {
-        this.observations = observations;
+    private void setObservations(final String observations) {
+        this.observations = TextHelper.getDefault(observations);
         }
 }

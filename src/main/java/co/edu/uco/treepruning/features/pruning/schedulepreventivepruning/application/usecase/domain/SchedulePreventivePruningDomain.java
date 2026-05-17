@@ -3,6 +3,10 @@ package co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.applic
 import java.time.LocalDate;
 import java.util.UUID;
 
+import co.edu.uco.treepruning.crosscutting.helper.DateHelper;
+import co.edu.uco.treepruning.crosscutting.helper.TextHelper;
+import co.edu.uco.treepruning.crosscutting.helper.UUIDHelper;
+
 public final class SchedulePreventivePruningDomain {
 
     private UUID id;
@@ -71,29 +75,29 @@ public final class SchedulePreventivePruningDomain {
     	return observations; 
     	}
 
-    private void setStatus(UUID status) {
-        this.status = status;
+    private void setStatus(final UUID status) {
+        this.status = UUIDHelper.getUUIDHelper().getDefault(status);
     }
-    private void setPlannedDate(LocalDate plannedDate) {
-        this.plannedDate = plannedDate;
+    private void setPlannedDate(final LocalDate plannedDate) {
+        this.plannedDate = DateHelper.getDateHelper().getDefault(plannedDate);
     }
-    private void setExecutedDate(LocalDate executedDate) {
-        this.executedDate = executedDate;
+    private void setExecutedDate(final LocalDate executedDate) {
+        this.executedDate = DateHelper.getDateHelper().getDefault(executedDate);
     }
-    private void setTree(UUID tree) {
-        this.tree = tree;
+    private void setTree(final UUID tree) {
+        this.tree = UUIDHelper.getUUIDHelper().getDefault(tree);
     }
-    private void setQuadrille(UUID quadrille) {
-        this.quadrille = quadrille;
+    private void setQuadrille(final UUID quadrille) {
+        this.quadrille = UUIDHelper.getUUIDHelper().getDefault(quadrille);
     }
-    private void setType(UUID type) {
-        this.type = type;
+    private void setType(final UUID type) {
+        this.type = UUIDHelper.getUUIDHelper().getDefault(type);
     }
     private void setPhotographicRecordPath(
-            String photographicRecordPath) {
-        this.photographicRecordPath = photographicRecordPath;
+    		final String photographicRecordPath) {
+        this.photographicRecordPath = TextHelper.getDefaultWithTrim(photographicRecordPath);
     }
-    private void setObservations(String observations) {
-        this.observations = observations;
+    private void setObservations(final String observations) {
+        this.observations = TextHelper.getDefaultWithTrim(observations);
     }
 }
