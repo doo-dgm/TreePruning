@@ -1,14 +1,27 @@
 <template>
-  <div class="d-flex">
+  <div class="private-layout">
     <Sidebar />
-
-    <div class="flex-grow-1 p-4">
-      <!-- Aquí se renderiza el contenido privado -->
+    <main class="private-layout__content">
       <router-view />
-    </div>
+    </main>
   </div>
 </template>
 
 <script setup>
 import Sidebar from '@/components/Sidebar.vue'
 </script>
+
+<style scoped>
+.private-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.private-layout__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: #f0f2f5;
+}
+</style>

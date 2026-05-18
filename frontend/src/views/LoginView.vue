@@ -1,16 +1,15 @@
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuth } from '@/composables/useAuth'
+import { useRouter, useRoute } from 'vue-router'
+import { keycloakClient } from '@/config/keycloak'
 import logo from '@/assets/arbol.png'
 
 const router = useRouter()
-const { login } = useAuth()
+const route = useRoute()
 
 const username = ref('')
 const password = ref('')
 const error = ref(null)
-const loading = ref(false)
 
 async function handleLogin() {
   error.value = null
@@ -18,16 +17,17 @@ async function handleLogin() {
     error.value = 'Ingresa usuario y contraseña.'
     return
   }
-  loading.value = true
-  try {
-    // TODO: reemplazar con llamada real a Keycloak / API de autenticación
-    await new Promise((r) => setTimeout(r, 400))
-    login()
-    router.push('/administracion')
-  } catch {
-    error.value = 'Credenciales inválidas.'
-  } finally {
-    loading.value = false
+
+  const result = await keycloakClient.login({
+    username: username.value,
+    password: password.value,
+  })
+
+  if (result.success) {
+    const redirect = route.query.redirect || '/administracion'
+    router.push(redirect)
+  } else {
+    error.value = result.message
   }
 }
 </script>

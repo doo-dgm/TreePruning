@@ -1,10 +1,10 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { useAuth } from '@/composables/useAuth'
+import { useAuthStore } from '@/stores/auth'
 import logo from '@/assets/arbol.png'
 
 const router = useRouter()
-const { logout } = useAuth()
+const { logout } = useAuthStore()
 
 const nav = [
   { to: '/administracion', label: 'Administración', icon: '🗂️' },

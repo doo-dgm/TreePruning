@@ -8,7 +8,7 @@ const cards = ref([
   { label: 'Estados definidos',     icon: '📌', count: null, color: '#9b59b6', error: false },
   { label: 'Tipos de poda',         icon: '✂️', count: null, color: '#e67e22', error: false },
 ])
-
+/*
 onMounted(async () => {
   const fetchers = [
     treeService.getAll(),
@@ -26,7 +26,7 @@ onMounted(async () => {
       cards.value[i].error = true
     }
   })
-})
+})*/
 </script>
 
 <template>
