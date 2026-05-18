@@ -40,7 +40,7 @@ public final class SchedulePreventivePruningDomain {
     }
 
     private void generateId() {
-        this.id = UUID.randomUUID();
+        this.id = UUIDHelper.getUUIDHelper().generateNewUUID();
     }
 
     public void regenerateId() {

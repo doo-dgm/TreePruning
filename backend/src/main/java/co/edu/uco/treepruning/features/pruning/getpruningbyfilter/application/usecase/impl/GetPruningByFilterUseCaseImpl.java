@@ -1,8 +1,10 @@
 package co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.usecase.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.inputport.dto.GetPruningFilterDTO;
+import co.edu.uco.treepruning.crosscutting.helper.DateHelper;
+import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.inputport.dto.GetPruningDTO;
 import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.usecase.GetPruningByFilterUseCase;
 import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.usecase.domain.GetPruningDomain;
 import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.usecase.impl.mapper.GetPruningDomainMapper;
@@ -21,10 +23,12 @@ public class GetPruningByFilterUseCaseImpl implements GetPruningByFilterUseCase 
     }
 
     @Override
-    public List<GetPruningDomain> execute(GetPruningFilterDTO filter) {
+    public List<GetPruningDomain> execute(GetPruningDTO filter) {
+        LocalDate dateFilter = DateHelper.getDateHelper().isDefaultDate(filter.getPlannedDate())
+                ? null : filter.getPlannedDate();
         return pruningRepository.findByFilter(
-                filter.getId(), filter.getStatusId(), filter.getTreeId(),
-                filter.getQuadrilleId(), filter.getTypeId(), filter.getPlannedDate())
+                filter.getId(), filter.getStatus().getId(), filter.getTree().getId(),
+                filter.getQuadrille().getId(), filter.getType().getId(), dateFilter)
                 .stream()
                 .map(mapper::toDomain)
                 .toList();

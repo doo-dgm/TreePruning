@@ -13,7 +13,12 @@ public class ProgrammingEntity {
     private int frequencyMonths;
     private int amount;
 
-    public ProgrammingEntity() {}
+    public ProgrammingEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setInitialDate(DateHelper.getDateHelper().getDefault());
+        setFrequencyMonths(NumericHelper.getDefaultInt());
+        setAmount(NumericHelper.getDefaultInt());
+    }
 
     public ProgrammingEntity(UUID id) {
         setId(id);

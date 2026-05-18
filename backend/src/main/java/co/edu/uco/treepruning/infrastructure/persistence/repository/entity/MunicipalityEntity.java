@@ -12,7 +12,9 @@ public class MunicipalityEntity {
     private StateEntity state;
     
     public MunicipalityEntity() {
-		
+		setId(UUIDHelper.getUUIDHelper().getDefault());
+		setName(TextHelper.getDefault());
+		setState(new StateEntity());
 	}
     
     public MunicipalityEntity(UUID id) {

@@ -2,7 +2,7 @@ package co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.applicati
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.dto.GetQuadrilleFilterDTO;
+import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.dto.GetQuadrilleDTO;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.usecase.GetQuadrilleByFilterUseCase;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.usecase.domain.GetQuadrilleDomain;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.usecase.impl.mapper.GetQuadrilleDomainMapper;
@@ -21,8 +21,8 @@ public class GetQuadrilleByFilterUseCaseImpl implements GetQuadrilleByFilterUseC
     }
 
     @Override
-    public List<GetQuadrilleDomain> execute(GetQuadrilleFilterDTO filter) {
-        return quadrilleRepository.findByFilter(filter.getId(), filter.getQuadrilleName(), filter.getManagerId())
+    public List<GetQuadrilleDomain> execute(GetQuadrilleDTO filter) {
+        return quadrilleRepository.findByFilter(filter.getId(), filter.getQuadrilleName(), filter.getManager().getId())
                 .stream()
                 .map(mapper::toDomain)
                 .toList();

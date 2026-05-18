@@ -2,7 +2,7 @@ package co.edu.uco.treepruning.features.status.getstatusbyfilter.application.use
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.dto.GetStatusFilterDTO;
+import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.dto.GetStatusDTO;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.usecase.GetStatusByFilterUseCase;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.usecase.domain.GetStatusDomain;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.usecase.impl.mapper.GetStatusDomainMapper;
@@ -21,7 +21,7 @@ public class GetStatusByFilterUseCaseImpl implements GetStatusByFilterUseCase {
     }
 
     @Override
-    public List<GetStatusDomain> execute(GetStatusFilterDTO filter) {
+    public List<GetStatusDomain> execute(GetStatusDTO filter) {
         return statusRepository.findByFilter(filter.getId(), filter.getName())
                 .stream()
                 .map(mapper::toDomain)

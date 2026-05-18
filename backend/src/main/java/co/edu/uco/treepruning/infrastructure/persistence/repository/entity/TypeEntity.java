@@ -10,7 +10,10 @@ public class TypeEntity {
     private UUID id;
     private String name;
 
-    public TypeEntity() {}
+    public TypeEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setName(TextHelper.getDefault());
+    }
 
     public TypeEntity(UUID id) {
         setId(id);

@@ -10,8 +10,8 @@ import co.edu.uco.treepruning.infrastructure.persistence.repository.sql.jpa.enti
 public interface TypeJPARepository extends JpaRepository<TypeJPAEntity, UUID> {
 
     @Query("SELECT t FROM TypeJPAEntity t WHERE " +
-           "(:id IS NULL OR t.id = :id) AND " +
-           "(:name IS NULL OR t.name ILIKE concat('%', cast(:name as String), '%'))")
+           "(cast(:id as String) = '00000000-0000-0000-0000-000000000000' OR t.id = :id) AND " +
+           "('' = :name OR t.name ILIKE concat('%', cast(:name as String), '%'))")
     List<TypeJPAEntity> findByFilter(@Param("id") UUID id,
                                      @Param("name") String name);
 }

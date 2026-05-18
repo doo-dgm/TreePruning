@@ -46,6 +46,11 @@ public class SectorJPARepositoryAdapter implements SectorRepository {
     public SectorEntity findById(UUID id) {
         return repository.findById(id)
                 .map(mapper::toEntity)
-                .orElse(null);
+                .orElse(new SectorEntity());
+    }
+
+    @Override
+    public List<SectorEntity> findByFilter(UUID id, String name) {
+        return mapper.toEntityList(repository.findByFilter(id, name));
     }
 }

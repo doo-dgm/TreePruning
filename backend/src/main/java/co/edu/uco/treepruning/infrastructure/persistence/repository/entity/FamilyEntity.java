@@ -10,7 +10,11 @@ public class FamilyEntity {
     private String scientificName;
     private String commonName;
 
-    public FamilyEntity() {}
+    public FamilyEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setScientificName(TextHelper.getDefault());
+        setCommonName(TextHelper.getDefault());
+    }
 
     public FamilyEntity(UUID id) {
         setId(id);

@@ -31,6 +31,11 @@ public class ProgrammingJPARepositoryAdapter implements ProgrammingRepository {
     public ProgrammingEntity findById(UUID id) {
         return repository.findById(id)
                 .map(mapper::toEntity)
-                .orElse(null);
+                .orElse(new ProgrammingEntity());
+    }
+
+    @Override
+    public List<ProgrammingEntity> findByFilter(UUID id) {
+        return mapper.toEntityList(repository.findByFilter(id));
     }
 }

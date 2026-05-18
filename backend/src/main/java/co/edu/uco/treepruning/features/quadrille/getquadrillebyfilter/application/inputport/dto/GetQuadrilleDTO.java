@@ -1,24 +1,35 @@
 package co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.dto;
 
 import java.util.UUID;
+import co.edu.uco.treepruning.crosscutting.helper.ObjectHelper;
 import co.edu.uco.treepruning.crosscutting.helper.TextHelper;
 import co.edu.uco.treepruning.crosscutting.helper.UUIDHelper;
+import co.edu.uco.treepruning.features.manager.getmanagerbyfilter.application.inputport.dto.GetManagerDTO;
 
 public final class GetQuadrilleDTO {
     private UUID id;
     private String quadrilleName;
-    private UUID manager;
-    private String managerName;
+    private GetManagerDTO manager;
 
-    public GetQuadrilleDTO(UUID id, String quadrilleName, UUID manager, String managerName) {
-        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
-        this.quadrilleName = TextHelper.getDefaultWithTrim(quadrilleName);
-        this.manager = UUIDHelper.getUUIDHelper().getDefault(manager);
-        this.managerName = TextHelper.getDefaultWithTrim(managerName);
+    public GetQuadrilleDTO(UUID id, String quadrilleName, GetManagerDTO manager) {
+        setId(id);
+        setQuadrilleName(quadrilleName);
+        setManager(manager);
     }
 
     public UUID getId() { return id; }
     public String getQuadrilleName() { return quadrilleName; }
-    public UUID getManager() { return manager; }
-    public String getManagerName() { return managerName; }
+    public GetManagerDTO getManager() { return manager; }
+
+    private void setId(final UUID id) {
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
+    }
+    private void setQuadrilleName(final String quadrilleName) {
+        this.quadrilleName = TextHelper.getDefaultWithTrim(quadrilleName);
+    }
+    private void setManager(final GetManagerDTO manager) {
+        this.manager = ObjectHelper.isNull(manager)
+                ? new GetManagerDTO(null, null)
+                : manager;
+    }
 }

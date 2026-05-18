@@ -3,16 +3,20 @@ package co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.applic
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.dto.GetQuadrilleFilterDTO;
+import co.edu.uco.treepruning.features.manager.getmanagerbyfilter.application.inputport.dto.GetManagerDTO;
+import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.dto.GetQuadrilleDTO;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.usecase.GetQuadrilleByFilterUseCase;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.usecase.domain.GetQuadrilleDomain;
-import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.dto.GetStatusFilterDTO;
+import co.edu.uco.treepruning.features.family.getfamilybyfilter.application.inputport.dto.GetFamilyDTO;
+import co.edu.uco.treepruning.features.programming.getprogrammingbyfilter.application.inputport.dto.GetProgrammingDTO;
+import co.edu.uco.treepruning.features.sector.getsectorbyfilter.application.inputport.dto.GetSectorDTO;
+import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.dto.GetStatusDTO;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.usecase.GetStatusByFilterUseCase;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.usecase.domain.GetStatusDomain;
-import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.inputport.dto.GetTreeFilterDTO;
+import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.inputport.dto.GetTreeDTO;
 import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.usecase.GetTreeByFilterUseCase;
 import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.usecase.domain.GetTreeDomain;
-import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.dto.GetTypeFilterDTO;
+import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.dto.GetTypeDTO;
 import co.edu.uco.treepruning.features.type.gettypebyfilter.application.usecase.GetTypeByFilterUseCase;
 import co.edu.uco.treepruning.features.type.gettypebyfilter.application.usecase.domain.GetTypeDomain;
 import co.edu.uco.treepruning.features.pruning.schedulepreventivepruning.application.usecase.SchedulePreventivePruningUseCase;
@@ -54,25 +58,25 @@ public class SchedulePreventivePruningUseCaseImpl
     @Override
     public Void execute(SchedulePreventivePruningDomain data) {
         List<GetTreeDomain> trees = getTreeByFilterUseCase.execute(
-                new GetTreeFilterDTO(data.getTree(), null, null));
+                new GetTreeDTO(data.getTree(), null, null, new GetFamilyDTO(null, null, null), new GetSectorDTO(null, null), new GetProgrammingDTO(null, null, 0, 0)));
         if (trees.isEmpty()) {
             throw TreeNotFoundForPruningException.create(data.getTree());
         }
 
         List<GetQuadrilleDomain> quadrilles = getQuadrilleByFilterUseCase.execute(
-                new GetQuadrilleFilterDTO(data.getQuadrille(), null, null));
+                new GetQuadrilleDTO(data.getQuadrille(), null, new GetManagerDTO(null, null)));
         if (quadrilles.isEmpty()) {
             throw QuadrilleNotFoundForPruningException.create(data.getQuadrille());
         }
 
         List<GetTypeDomain> types = getTypeByFilterUseCase.execute(
-                new GetTypeFilterDTO(data.getType(), null));
+                new GetTypeDTO(data.getType(), null));
         if (types.isEmpty()) {
             throw PruningTypeNotFoundForPruningException.create(data.getType());
         }
 
         List<GetStatusDomain> statuses = getStatusByFilterUseCase.execute(
-                new GetStatusFilterDTO(data.getStatus(), null));
+                new GetStatusDTO(data.getStatus(), null));
         if (statuses.isEmpty()) {
             throw StatusNotFoundForPruningException.create(data.getStatus());
         }

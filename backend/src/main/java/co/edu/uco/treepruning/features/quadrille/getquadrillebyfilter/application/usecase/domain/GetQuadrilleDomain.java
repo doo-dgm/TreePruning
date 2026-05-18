@@ -1,22 +1,24 @@
 package co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.usecase.domain;
 
 import java.util.UUID;
+import co.edu.uco.treepruning.features.manager.getmanagerbyfilter.application.usecase.domain.GetManagerDomain;
 
 public final class GetQuadrilleDomain {
-    private final UUID id;
-    private final String quadrilleName;
-    private final UUID manager;
-    private final String managerName;
+    private UUID id;
+    private String quadrilleName;
+    private GetManagerDomain manager;
 
-    public GetQuadrilleDomain(UUID id, String quadrilleName, UUID manager, String managerName) {
-        this.id = id;
-        this.quadrilleName = quadrilleName;
-        this.manager = manager;
-        this.managerName = managerName;
+    public GetQuadrilleDomain(UUID id, String quadrilleName, GetManagerDomain manager) {
+        setId(id);
+        setQuadrilleName(quadrilleName);
+        setManager(manager);
     }
 
     public UUID getId() { return id; }
     public String getQuadrilleName() { return quadrilleName; }
-    public UUID getManager() { return manager; }
-    public String getManagerName() { return managerName; }
+    public GetManagerDomain getManager() { return manager; }
+
+    private void setId(final UUID id) { this.id = id; }
+    private void setQuadrilleName(final String quadrilleName) { this.quadrilleName = quadrilleName; }
+    private void setManager(final GetManagerDomain manager) { this.manager = manager; }
 }

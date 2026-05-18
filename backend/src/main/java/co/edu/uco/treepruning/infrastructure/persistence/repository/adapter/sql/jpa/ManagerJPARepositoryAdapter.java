@@ -31,6 +31,11 @@ public class ManagerJPARepositoryAdapter implements ManagerRepository {
     public ManagerEntity findById(UUID id) {
         return repository.findById(id)
                 .map(mapper::toEntity)
-                .orElse(null);
+                .orElse(new ManagerEntity());
+    }
+
+    @Override
+    public List<ManagerEntity> findByFilter(UUID id) {
+        return mapper.toEntityList(repository.findByFilter(id));
     }
 }

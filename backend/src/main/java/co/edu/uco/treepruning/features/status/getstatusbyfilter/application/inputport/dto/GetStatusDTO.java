@@ -9,10 +9,17 @@ public final class GetStatusDTO {
     private String name;
 
     public GetStatusDTO(UUID id, String name) {
-        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
-        this.name = TextHelper.getDefaultWithTrim(name);
+        setId(id);
+        setName(name);
     }
 
     public UUID getId() { return id; }
     public String getName() { return name; }
+
+    private void setId(final UUID id) {
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
+    }
+    private void setName(final String name) {
+        this.name = TextHelper.getDefaultWithTrim(name);
+    }
 }

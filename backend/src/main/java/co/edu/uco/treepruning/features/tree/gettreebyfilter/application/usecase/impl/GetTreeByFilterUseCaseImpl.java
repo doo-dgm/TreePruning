@@ -2,7 +2,7 @@ package co.edu.uco.treepruning.features.tree.gettreebyfilter.application.usecase
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.inputport.dto.GetTreeFilterDTO;
+import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.inputport.dto.GetTreeDTO;
 import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.usecase.GetTreeByFilterUseCase;
 import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.usecase.domain.GetTreeDomain;
 import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.usecase.impl.mapper.GetTreeDomainMapper;
@@ -21,8 +21,8 @@ public class GetTreeByFilterUseCaseImpl implements GetTreeByFilterUseCase {
     }
 
     @Override
-    public List<GetTreeDomain> execute(GetTreeFilterDTO filter) {
-        return treeRepository.findByFilter(filter.getId(), filter.getFamilyId(), filter.getSectorId())
+    public List<GetTreeDomain> execute(GetTreeDTO filter) {
+        return treeRepository.findByFilter(filter.getId(), filter.getFamily().getId(), filter.getSector().getId())
                 .stream()
                 .map(mapper::toDomain)
                 .toList();

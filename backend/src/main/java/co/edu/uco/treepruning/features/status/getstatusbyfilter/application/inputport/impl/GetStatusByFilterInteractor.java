@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.GetStatusByFilterInputPort;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.dto.GetStatusDTO;
-import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.dto.GetStatusFilterDTO;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.impl.mapper.GetStatusDTOMapper;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.usecase.GetStatusByFilterUseCase;
 
@@ -21,7 +20,7 @@ public class GetStatusByFilterInteractor implements GetStatusByFilterInputPort {
     }
 
     @Override
-    public List<GetStatusDTO> execute(GetStatusFilterDTO filter) {
+    public List<GetStatusDTO> execute(GetStatusDTO filter) {
         return useCase.execute(filter)
                 .stream()
                 .map(dtoMapper::toDTO)

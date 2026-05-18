@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.GetTypeByFilterInputPort;
 import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.dto.GetTypeDTO;
-import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.dto.GetTypeFilterDTO;
 import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.impl.mapper.GetTypeDTOMapper;
 import co.edu.uco.treepruning.features.type.gettypebyfilter.application.usecase.GetTypeByFilterUseCase;
 
@@ -21,7 +20,7 @@ public class GetTypeByFilterInteractor implements GetTypeByFilterInputPort {
     }
 
     @Override
-    public List<GetTypeDTO> execute(GetTypeFilterDTO filter) {
+    public List<GetTypeDTO> execute(GetTypeDTO filter) {
         return useCase.execute(filter)
                 .stream()
                 .map(dtoMapper::toDTO)

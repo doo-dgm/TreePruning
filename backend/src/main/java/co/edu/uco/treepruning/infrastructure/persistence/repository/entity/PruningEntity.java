@@ -20,7 +20,18 @@ public class PruningEntity {
     private String photographicRecordPath;
     private String observations;
 
-    public PruningEntity() {}
+    public PruningEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setStatus(new StatusEntity());
+        setPlannedDate(DateHelper.getDateHelper().getDefault());
+        setExecutedDate(DateHelper.getDateHelper().getDefault());
+        setTree(new TreeEntity());
+        setQuadrille(new QuadrilleEntity());
+        setType(new TypeEntity());
+        setPqr(new PQREntity());
+        setPhotographicRecordPath(TextHelper.getDefault());
+        setObservations(TextHelper.getDefault());
+    }
 
     public PruningEntity(UUID id) {
         setId(id);

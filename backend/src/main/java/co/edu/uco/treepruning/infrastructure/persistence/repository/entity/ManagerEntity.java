@@ -10,7 +10,10 @@ public class ManagerEntity {
     private UUID id;
     private PersonEntity person;
 
-    public ManagerEntity() {}
+    public ManagerEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setPerson(new PersonEntity());
+    }
 
     public ManagerEntity(UUID id) {
         setId(id);

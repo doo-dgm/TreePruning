@@ -3,6 +3,7 @@ package co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.i
 import java.time.LocalDate;
 import java.util.UUID;
 import co.edu.uco.treepruning.crosscutting.helper.DateHelper;
+import co.edu.uco.treepruning.crosscutting.helper.ObjectHelper;
 import co.edu.uco.treepruning.crosscutting.helper.TextHelper;
 import co.edu.uco.treepruning.crosscutting.helper.UUIDHelper;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.dto.GetQuadrilleDTO;
@@ -26,16 +27,16 @@ public final class GetPruningDTO {
             LocalDate plannedDate, LocalDate executedDate,
             GetTreeDTO tree, GetQuadrilleDTO quadrille, GetTypeDTO type,
             UUID pqr, String photographicRecordPath, String observations) {
-        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
-        this.status = status;
-        this.plannedDate = DateHelper.getDateHelper().getDefault(plannedDate);
-        this.executedDate = DateHelper.getDateHelper().getDefault(executedDate);
-        this.tree = tree;
-        this.quadrille = quadrille;
-        this.type = type;
-        this.pqr = UUIDHelper.getUUIDHelper().getDefault(pqr);
-        this.photographicRecordPath = TextHelper.getDefaultWithTrim(photographicRecordPath);
-        this.observations = TextHelper.getDefaultWithTrim(observations);
+        setId(id);
+        setStatus(status);
+        setPlannedDate(plannedDate);
+        setExecutedDate(executedDate);
+        setTree(tree);
+        setQuadrille(quadrille);
+        setType(type);
+        setPqr(pqr);
+        setPhotographicRecordPath(photographicRecordPath);
+        setObservations(observations);
     }
 
     public UUID getId() { return id; }
@@ -48,4 +49,43 @@ public final class GetPruningDTO {
     public UUID getPqr() { return pqr; }
     public String getPhotographicRecordPath() { return photographicRecordPath; }
     public String getObservations() { return observations; }
+
+    private void setId(final UUID id) {
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
+    }
+    private void setStatus(final GetStatusDTO status) {
+        this.status = ObjectHelper.isNull(status)
+                ? new GetStatusDTO(null, null)
+                : status;
+    }
+    private void setPlannedDate(final LocalDate plannedDate) {
+        this.plannedDate = DateHelper.getDateHelper().getDefault(plannedDate);
+    }
+    private void setExecutedDate(final LocalDate executedDate) {
+        this.executedDate = DateHelper.getDateHelper().getDefault(executedDate);
+    }
+    private void setTree(final GetTreeDTO tree) {
+        this.tree = ObjectHelper.isNull(tree)
+                ? new GetTreeDTO(null, null, null, null, null, null)
+                : tree;
+    }
+    private void setQuadrille(final GetQuadrilleDTO quadrille) {
+        this.quadrille = ObjectHelper.isNull(quadrille)
+                ? new GetQuadrilleDTO(null, null, null)
+                : quadrille;
+    }
+    private void setType(final GetTypeDTO type) {
+        this.type = ObjectHelper.isNull(type)
+                ? new GetTypeDTO(null, null)
+                : type;
+    }
+    private void setPqr(final UUID pqr) {
+        this.pqr = UUIDHelper.getUUIDHelper().getDefault(pqr);
+    }
+    private void setPhotographicRecordPath(final String photographicRecordPath) {
+        this.photographicRecordPath = TextHelper.getDefaultWithTrim(photographicRecordPath);
+    }
+    private void setObservations(final String observations) {
+        this.observations = TextHelper.getDefaultWithTrim(observations);
+    }
 }

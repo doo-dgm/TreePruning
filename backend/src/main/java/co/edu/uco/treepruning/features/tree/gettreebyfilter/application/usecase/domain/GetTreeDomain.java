@@ -1,39 +1,39 @@
 package co.edu.uco.treepruning.features.tree.gettreebyfilter.application.usecase.domain;
 
 import java.util.UUID;
+import co.edu.uco.treepruning.features.family.getfamilybyfilter.application.usecase.domain.GetFamilyDomain;
+import co.edu.uco.treepruning.features.programming.getprogrammingbyfilter.application.usecase.domain.GetProgrammingDomain;
+import co.edu.uco.treepruning.features.sector.getsectorbyfilter.application.usecase.domain.GetSectorDomain;
 
 public final class GetTreeDomain {
-    private final UUID id;
-    private final String longitude;
-    private final String latitude;
-    private final UUID family;
-    private final String familyCommonName;
-    private final String familyScientificName;
-    private final UUID sector;
-    private final String sectorName;
-    private final UUID programming;
+    private UUID id;
+    private String longitude;
+    private String latitude;
+    private GetFamilyDomain family;
+    private GetSectorDomain sector;
+    private GetProgrammingDomain programming;
 
     public GetTreeDomain(UUID id, String longitude, String latitude,
-            UUID family, String familyCommonName, String familyScientificName,
-            UUID sector, String sectorName, UUID programming) {
-        this.id = id;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.family = family;
-        this.familyCommonName = familyCommonName;
-        this.familyScientificName = familyScientificName;
-        this.sector = sector;
-        this.sectorName = sectorName;
-        this.programming = programming;
+            GetFamilyDomain family, GetSectorDomain sector, GetProgrammingDomain programming) {
+        setId(id);
+        setLongitude(longitude);
+        setLatitude(latitude);
+        setFamily(family);
+        setSector(sector);
+        setProgramming(programming);
     }
 
     public UUID getId() { return id; }
     public String getLongitude() { return longitude; }
     public String getLatitude() { return latitude; }
-    public UUID getFamily() { return family; }
-    public String getFamilyCommonName() { return familyCommonName; }
-    public String getFamilyScientificName() { return familyScientificName; }
-    public UUID getSector() { return sector; }
-    public String getSectorName() { return sectorName; }
-    public UUID getProgramming() { return programming; }
+    public GetFamilyDomain getFamily() { return family; }
+    public GetSectorDomain getSector() { return sector; }
+    public GetProgrammingDomain getProgramming() { return programming; }
+
+    private void setId(final UUID id) { this.id = id; }
+    private void setLongitude(final String longitude) { this.longitude = longitude; }
+    private void setLatitude(final String latitude) { this.latitude = latitude; }
+    private void setFamily(final GetFamilyDomain family) { this.family = family; }
+    private void setSector(final GetSectorDomain sector) { this.sector = sector; }
+    private void setProgramming(final GetProgrammingDomain programming) { this.programming = programming; }
 }

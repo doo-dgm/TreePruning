@@ -15,4 +15,6 @@ public interface SectorRepository {
     List<SectorEntity> findAll();  
     
     SectorEntity findById(UUID id);
+
+    List<SectorEntity> findByFilter(UUID id, String name);
 }

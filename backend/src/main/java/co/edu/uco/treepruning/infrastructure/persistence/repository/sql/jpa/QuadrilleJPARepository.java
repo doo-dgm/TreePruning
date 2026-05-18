@@ -10,9 +10,9 @@ import co.edu.uco.treepruning.infrastructure.persistence.repository.sql.jpa.enti
 public interface QuadrilleJPARepository extends JpaRepository<QuadrilleJPAEntity, UUID> {
 
     @Query("SELECT q FROM QuadrilleJPAEntity q WHERE " +
-           "(:id IS NULL OR q.id = :id) AND " +
-           "(:quadrilleName IS NULL OR q.quadrilleName ILIKE concat('%', cast(:quadrilleName as String), '%')) AND " +
-           "(:managerId IS NULL OR q.manager.id = :managerId)")
+           "(cast(:id as String) = '00000000-0000-0000-0000-000000000000' OR q.id = :id) AND " +
+           "('' = :quadrilleName OR q.quadrilleName ILIKE concat('%', cast(:quadrilleName as String), '%')) AND " +
+           "(cast(:managerId as String) = '00000000-0000-0000-0000-000000000000' OR q.manager.id = :managerId)")
     List<QuadrilleJPAEntity> findByFilter(@Param("id") UUID id,
                                           @Param("quadrilleName") String quadrilleName,
                                           @Param("managerId") UUID managerId);

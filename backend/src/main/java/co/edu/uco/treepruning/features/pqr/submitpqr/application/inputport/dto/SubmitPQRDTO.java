@@ -70,8 +70,8 @@ public final class SubmitPQRDTO {
 		this.person = UUIDHelper.getUUIDHelper().getDefault(person);
 	}
 
-	private void setPhotographicRecordPath(String photographicRecordPath) {
-		this.photographicRecordPath = TextHelper.getDefault(photographicRecordPath);
+	private void setPhotographicRecordPath(final String photographicRecordPath) {
+		this.photographicRecordPath = TextHelper.getDefaultWithTrim(photographicRecordPath);
 	}
     
     

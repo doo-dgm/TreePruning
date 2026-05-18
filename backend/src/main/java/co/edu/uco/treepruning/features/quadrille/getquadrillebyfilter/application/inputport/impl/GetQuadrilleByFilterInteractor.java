@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.GetQuadrilleByFilterInputPort;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.dto.GetQuadrilleDTO;
-import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.dto.GetQuadrilleFilterDTO;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.impl.mapper.GetQuadrilleDTOMapper;
 import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.usecase.GetQuadrilleByFilterUseCase;
 
@@ -21,7 +20,7 @@ public class GetQuadrilleByFilterInteractor implements GetQuadrilleByFilterInput
     }
 
     @Override
-    public List<GetQuadrilleDTO> execute(GetQuadrilleFilterDTO filter) {
+    public List<GetQuadrilleDTO> execute(GetQuadrilleDTO filter) {
         return useCase.execute(filter)
                 .stream()
                 .map(dtoMapper::toDTO)

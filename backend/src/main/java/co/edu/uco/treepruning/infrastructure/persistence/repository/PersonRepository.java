@@ -11,4 +11,5 @@ public interface PersonRepository {
 	void delete(UUID id);
 	List<PersonEntity> findAll();
 	PersonEntity findById(UUID id);
+	List<PersonEntity> findByFilter(UUID id, String firstName, String firstLastName);
 }

@@ -31,6 +31,11 @@ public class FamilyJPARepositoryAdapter implements FamilyRepository {
     public FamilyEntity findById(UUID id) {
         return repository.findById(id)
                 .map(mapper::toEntity)
-                .orElse(null);
+                .orElse(new FamilyEntity());
+    }
+
+    @Override
+    public List<FamilyEntity> findByFilter(UUID id, String commonName, String scientificName) {
+        return mapper.toEntityList(repository.findByFilter(id, commonName, scientificName));
     }
 }

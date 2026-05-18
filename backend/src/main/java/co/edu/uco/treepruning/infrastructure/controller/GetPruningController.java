@@ -14,7 +14,10 @@ import co.edu.uco.treepruning.crosscutting.exception.ResourceNotFoundException;
 import co.edu.uco.treepruning.crosscutting.response.ApiResponse;
 import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.inputport.GetPruningByFilterInputPort;
 import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.inputport.dto.GetPruningDTO;
-import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.inputport.dto.GetPruningFilterDTO;
+import co.edu.uco.treepruning.features.quadrille.getquadrillebyfilter.application.inputport.dto.GetQuadrilleDTO;
+import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.dto.GetStatusDTO;
+import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.inputport.dto.GetTreeDTO;
+import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.dto.GetTypeDTO;
 
 @RestController
 @RequestMapping("/api/v1/prunings")
@@ -35,14 +38,20 @@ public class GetPruningController {
             @RequestParam(required = false) UUID typeId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate plannedDate) {
         List<GetPruningDTO> results = inputPort.execute(
-                new GetPruningFilterDTO(id, statusId, treeId, quadrilleId, typeId, plannedDate));
+                new GetPruningDTO(id,
+                        new GetStatusDTO(statusId, null),
+                        plannedDate, null,
+                        new GetTreeDTO(treeId, null, null, null, null, null),
+                        new GetQuadrilleDTO(quadrilleId, null, null),
+                        new GetTypeDTO(typeId, null),
+                        null, null, null));
         return ResponseEntity.ok(ApiResponse.ok("Podas obtenidas exitosamente.", results));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<GetPruningDTO>> getById(@PathVariable UUID id) {
         List<GetPruningDTO> results = inputPort.execute(
-                new GetPruningFilterDTO(id, null, null, null, null, null));
+                new GetPruningDTO(id, null, null, null, null, null, null, null, null, null));
         if (results.isEmpty()) {
             throw ResourceNotFoundException.create("Pruning", id);
         }

@@ -14,7 +14,14 @@ public class TreeEntity {
     private SectorEntity sector;
     private ProgrammingEntity programming;
 
-    public TreeEntity() {}
+    public TreeEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setLongitude(TextHelper.getDefault());
+        setLatitude(TextHelper.getDefault());
+        setFamily(new FamilyEntity());
+        setSector(new SectorEntity());
+        setProgramming(new ProgrammingEntity());
+    }
 
     public TreeEntity(UUID id) {
         setId(id);

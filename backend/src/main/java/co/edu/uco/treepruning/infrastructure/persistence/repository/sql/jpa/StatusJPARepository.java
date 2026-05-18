@@ -10,8 +10,8 @@ import co.edu.uco.treepruning.infrastructure.persistence.repository.sql.jpa.enti
 public interface StatusJPARepository extends JpaRepository<StatusJPAEntity, UUID> {
 
     @Query("SELECT s FROM StatusJPAEntity s WHERE " +
-           "(:id IS NULL OR s.id = :id) AND " +
-           "(:name IS NULL OR s.name ILIKE concat('%', cast(:name as String), '%'))")
+           "(cast(:id as String) = '00000000-0000-0000-0000-000000000000' OR s.id = :id) AND " +
+           "('' = :name OR s.name ILIKE concat('%', cast(:name as String), '%'))")
     List<StatusJPAEntity> findByFilter(@Param("id") UUID id,
                                        @Param("name") String name);
 }

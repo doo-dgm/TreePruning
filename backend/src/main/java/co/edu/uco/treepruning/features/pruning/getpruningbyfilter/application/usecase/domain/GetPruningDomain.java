@@ -8,31 +8,31 @@ import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.usecase.
 import co.edu.uco.treepruning.features.type.gettypebyfilter.application.usecase.domain.GetTypeDomain;
 
 public final class GetPruningDomain {
-    private final UUID id;
-    private final GetStatusDomain status;
-    private final LocalDate plannedDate;
-    private final LocalDate executedDate;
-    private final GetTreeDomain tree;
-    private final GetQuadrilleDomain quadrille;
-    private final GetTypeDomain type;
-    private final UUID pqr;
-    private final String photographicRecordPath;
-    private final String observations;
+    private UUID id;
+    private GetStatusDomain status;
+    private LocalDate plannedDate;
+    private LocalDate executedDate;
+    private GetTreeDomain tree;
+    private GetQuadrilleDomain quadrille;
+    private GetTypeDomain type;
+    private UUID pqr;
+    private String photographicRecordPath;
+    private String observations;
 
     public GetPruningDomain(UUID id, GetStatusDomain status,
             LocalDate plannedDate, LocalDate executedDate,
             GetTreeDomain tree, GetQuadrilleDomain quadrille, GetTypeDomain type,
             UUID pqr, String photographicRecordPath, String observations) {
-        this.id = id;
-        this.status = status;
-        this.plannedDate = plannedDate;
-        this.executedDate = executedDate;
-        this.tree = tree;
-        this.quadrille = quadrille;
-        this.type = type;
-        this.pqr = pqr;
-        this.photographicRecordPath = photographicRecordPath;
-        this.observations = observations;
+        setId(id);
+        setStatus(status);
+        setPlannedDate(plannedDate);
+        setExecutedDate(executedDate);
+        setTree(tree);
+        setQuadrille(quadrille);
+        setType(type);
+        setPqr(pqr);
+        setPhotographicRecordPath(photographicRecordPath);
+        setObservations(observations);
     }
 
     public UUID getId() { return id; }
@@ -45,4 +45,15 @@ public final class GetPruningDomain {
     public UUID getPqr() { return pqr; }
     public String getPhotographicRecordPath() { return photographicRecordPath; }
     public String getObservations() { return observations; }
+
+    private void setId(final UUID id) { this.id = id; }
+    private void setStatus(final GetStatusDomain status) { this.status = status; }
+    private void setPlannedDate(final LocalDate plannedDate) { this.plannedDate = plannedDate; }
+    private void setExecutedDate(final LocalDate executedDate) { this.executedDate = executedDate; }
+    private void setTree(final GetTreeDomain tree) { this.tree = tree; }
+    private void setQuadrille(final GetQuadrilleDomain quadrille) { this.quadrille = quadrille; }
+    private void setType(final GetTypeDomain type) { this.type = type; }
+    private void setPqr(final UUID pqr) { this.pqr = pqr; }
+    private void setPhotographicRecordPath(final String photographicRecordPath) { this.photographicRecordPath = photographicRecordPath; }
+    private void setObservations(final String observations) { this.observations = observations; }
 }

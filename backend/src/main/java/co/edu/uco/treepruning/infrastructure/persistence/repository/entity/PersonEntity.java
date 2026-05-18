@@ -28,7 +28,20 @@ public class PersonEntity {
     private int age;
     
     public PersonEntity() {
-    	
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setFirstName(TextHelper.getDefault());
+        setSecondName(TextHelper.getDefault());
+        setFirstLastName(TextHelper.getDefault());
+        setSecondLastName(TextHelper.getDefault());
+        setDocument(new DocumentEntity());
+        setDocumentNumber(TextHelper.getDefault());
+        setBirthDate(DateHelper.getDateHelper().getDefault());
+        setAddress(TextHelper.getDefault());
+        setEmail(TextHelper.getDefault());
+        setEmailConfirmed(BooleanHelper.getDefault());
+        setPhone(TextHelper.getDefault());
+        setPhoneConfirmed(BooleanHelper.getDefault());
+        setAge(NumericHelper.getDefaultInt());
     }
     
     public PersonEntity(UUID id) {
@@ -42,9 +55,9 @@ public class PersonEntity {
     			setBirthDate(DateHelper.getDateHelper().getDefault());
     			setAddress(TextHelper.getDefault());
     			setEmail(TextHelper.getDefault());
-    			setEmailConfirmed(BooleanHelper.getDefault(false));
+    			setEmailConfirmed(BooleanHelper.getDefault());
     			setPhone(TextHelper.getDefault());
-    			setPhoneConfirmed(BooleanHelper.getDefault(false));
+    			setPhoneConfirmed(BooleanHelper.getDefault());
     			setAge(NumericHelper.getDefaultInt());    			
     }
     
@@ -127,7 +140,7 @@ public class PersonEntity {
 		this.secondLastName = TextHelper.getDefaultWithTrim(secondLastName);
 	}
 	public void setDocument(DocumentEntity document) {
-		this.document = ObjectHelper.getDefault(document, null);
+		this.document = ObjectHelper.getDefault(document, new DocumentEntity());
 	}
 	public void setDocumentNumber(String documentNumber) {
 		this.documentNumber = TextHelper.getDefaultWithTrim(documentNumber);

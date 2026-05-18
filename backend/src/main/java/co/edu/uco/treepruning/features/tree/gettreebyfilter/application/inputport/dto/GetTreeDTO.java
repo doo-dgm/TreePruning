@@ -1,41 +1,60 @@
 package co.edu.uco.treepruning.features.tree.gettreebyfilter.application.inputport.dto;
 
 import java.util.UUID;
+import co.edu.uco.treepruning.crosscutting.helper.ObjectHelper;
 import co.edu.uco.treepruning.crosscutting.helper.TextHelper;
 import co.edu.uco.treepruning.crosscutting.helper.UUIDHelper;
+import co.edu.uco.treepruning.features.family.getfamilybyfilter.application.inputport.dto.GetFamilyDTO;
+import co.edu.uco.treepruning.features.programming.getprogrammingbyfilter.application.inputport.dto.GetProgrammingDTO;
+import co.edu.uco.treepruning.features.sector.getsectorbyfilter.application.inputport.dto.GetSectorDTO;
 
 public final class GetTreeDTO {
     private UUID id;
     private String longitude;
     private String latitude;
-    private UUID family;
-    private String familyCommonName;
-    private String familyScientificName;
-    private UUID sector;
-    private String sectorName;
-    private UUID programming;
+    private GetFamilyDTO family;
+    private GetSectorDTO sector;
+    private GetProgrammingDTO programming;
 
     public GetTreeDTO(UUID id, String longitude, String latitude,
-            UUID family, String familyCommonName, String familyScientificName,
-            UUID sector, String sectorName, UUID programming) {
-        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
-        this.longitude = TextHelper.getDefaultWithTrim(longitude);
-        this.latitude = TextHelper.getDefaultWithTrim(latitude);
-        this.family = UUIDHelper.getUUIDHelper().getDefault(family);
-        this.familyCommonName = TextHelper.getDefaultWithTrim(familyCommonName);
-        this.familyScientificName = TextHelper.getDefaultWithTrim(familyScientificName);
-        this.sector = UUIDHelper.getUUIDHelper().getDefault(sector);
-        this.sectorName = TextHelper.getDefaultWithTrim(sectorName);
-        this.programming = UUIDHelper.getUUIDHelper().getDefault(programming);
+            GetFamilyDTO family, GetSectorDTO sector, GetProgrammingDTO programming) {
+        setId(id);
+        setLongitude(longitude);
+        setLatitude(latitude);
+        setFamily(family);
+        setSector(sector);
+        setProgramming(programming);
     }
 
     public UUID getId() { return id; }
     public String getLongitude() { return longitude; }
     public String getLatitude() { return latitude; }
-    public UUID getFamily() { return family; }
-    public String getFamilyCommonName() { return familyCommonName; }
-    public String getFamilyScientificName() { return familyScientificName; }
-    public UUID getSector() { return sector; }
-    public String getSectorName() { return sectorName; }
-    public UUID getProgramming() { return programming; }
+    public GetFamilyDTO getFamily() { return family; }
+    public GetSectorDTO getSector() { return sector; }
+    public GetProgrammingDTO getProgramming() { return programming; }
+
+    private void setId(final UUID id) {
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
+    }
+    private void setLongitude(final String longitude) {
+        this.longitude = TextHelper.getDefaultWithTrim(longitude);
+    }
+    private void setLatitude(final String latitude) {
+        this.latitude = TextHelper.getDefaultWithTrim(latitude);
+    }
+    private void setFamily(final GetFamilyDTO family) {
+        this.family = ObjectHelper.isNull(family)
+                ? new GetFamilyDTO(null, null, null)
+                : family;
+    }
+    private void setSector(final GetSectorDTO sector) {
+        this.sector = ObjectHelper.isNull(sector)
+                ? new GetSectorDTO(null, null)
+                : sector;
+    }
+    private void setProgramming(final GetProgrammingDTO programming) {
+        this.programming = ObjectHelper.isNull(programming)
+                ? new GetProgrammingDTO(null, null, 0, 0)
+                : programming;
+    }
 }

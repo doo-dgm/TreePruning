@@ -11,7 +11,11 @@ public class QuadrilleEntity {
     private String quadrilleName;
     private ManagerEntity manager;
 
-    public QuadrilleEntity() {}
+    public QuadrilleEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setQuadrilleName(TextHelper.getDefault());
+        setManager(new ManagerEntity());
+    }
 
     public QuadrilleEntity(UUID id) {
         setId(id);

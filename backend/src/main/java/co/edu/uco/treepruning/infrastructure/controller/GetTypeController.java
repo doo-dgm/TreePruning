@@ -12,7 +12,6 @@ import co.edu.uco.treepruning.crosscutting.exception.ResourceNotFoundException;
 import co.edu.uco.treepruning.crosscutting.response.ApiResponse;
 import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.GetTypeByFilterInputPort;
 import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.dto.GetTypeDTO;
-import co.edu.uco.treepruning.features.type.gettypebyfilter.application.inputport.dto.GetTypeFilterDTO;
 
 @RestController
 @RequestMapping("/api/v1/types")
@@ -28,13 +27,13 @@ public class GetTypeController {
     public ResponseEntity<ApiResponse<List<GetTypeDTO>>> getByFilter(
             @RequestParam(required = false) UUID id,
             @RequestParam(required = false) String name) {
-        List<GetTypeDTO> results = inputPort.execute(new GetTypeFilterDTO(id, name));
+        List<GetTypeDTO> results = inputPort.execute(new GetTypeDTO(id, name));
         return ResponseEntity.ok(ApiResponse.ok("Tipos de poda obtenidos exitosamente.", results));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<GetTypeDTO>> getById(@PathVariable UUID id) {
-        List<GetTypeDTO> results = inputPort.execute(new GetTypeFilterDTO(id, null));
+        List<GetTypeDTO> results = inputPort.execute(new GetTypeDTO(id, null));
         if (results.isEmpty()) {
             throw ResourceNotFoundException.create("Type", id);
         }

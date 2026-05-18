@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.inputport.GetPruningByFilterInputPort;
 import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.inputport.dto.GetPruningDTO;
-import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.inputport.dto.GetPruningFilterDTO;
 import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.inputport.impl.mapper.GetPruningDTOMapper;
 import co.edu.uco.treepruning.features.pruning.getpruningbyfilter.application.usecase.GetPruningByFilterUseCase;
 
@@ -21,7 +20,7 @@ public class GetPruningByFilterInteractor implements GetPruningByFilterInputPort
     }
 
     @Override
-    public List<GetPruningDTO> execute(GetPruningFilterDTO filter) {
+    public List<GetPruningDTO> execute(GetPruningDTO filter) {
         return useCase.execute(filter)
                 .stream()
                 .map(dtoMapper::toDTO)

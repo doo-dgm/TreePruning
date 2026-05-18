@@ -10,7 +10,8 @@ public class CountryEntity {
     private String name;
     
     public CountryEntity() {
-    	
+		setId(UUIDHelper.getUUIDHelper().getDefault());
+		setName(TextHelper.getDefault());
     }
     
     public CountryEntity(UUID id) {

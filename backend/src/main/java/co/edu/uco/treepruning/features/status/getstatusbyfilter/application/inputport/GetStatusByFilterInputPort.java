@@ -3,7 +3,6 @@ package co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inp
 import java.util.List;
 import co.edu.uco.treepruning.application.inputport.InputPort;
 import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.dto.GetStatusDTO;
-import co.edu.uco.treepruning.features.status.getstatusbyfilter.application.inputport.dto.GetStatusFilterDTO;
 
-public interface GetStatusByFilterInputPort extends InputPort<GetStatusFilterDTO, List<GetStatusDTO>> {
+public interface GetStatusByFilterInputPort extends InputPort<GetStatusDTO, List<GetStatusDTO>> {
 }

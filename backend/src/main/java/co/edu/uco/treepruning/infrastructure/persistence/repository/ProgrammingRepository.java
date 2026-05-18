@@ -9,4 +9,6 @@ public interface ProgrammingRepository {
     List<ProgrammingEntity> findAll();
     
     ProgrammingEntity findById(UUID id);
+
+    List<ProgrammingEntity> findByFilter(UUID id);
 }

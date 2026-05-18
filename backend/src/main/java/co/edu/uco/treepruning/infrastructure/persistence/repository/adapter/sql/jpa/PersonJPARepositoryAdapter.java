@@ -46,6 +46,11 @@ public class PersonJPARepositoryAdapter implements PersonRepository {
     public PersonEntity findById(UUID id) {
         return repository.findById(id)
                 .map(mapper::toEntity)
-                .orElse(null);
+                .orElse(new PersonEntity());
+    }
+
+    @Override
+    public List<PersonEntity> findByFilter(UUID id, String firstName, String firstLastName) {
+        return mapper.toEntityList(repository.findByFilter(id, firstName, firstLastName));
     }
 }

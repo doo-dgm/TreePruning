@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.treepruning.crosscutting.exception.ResourceNotFoundException;
 import co.edu.uco.treepruning.crosscutting.response.ApiResponse;
+import co.edu.uco.treepruning.features.family.getfamilybyfilter.application.inputport.dto.GetFamilyDTO;
+import co.edu.uco.treepruning.features.sector.getsectorbyfilter.application.inputport.dto.GetSectorDTO;
 import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.inputport.GetTreeByFilterInputPort;
 import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.inputport.dto.GetTreeDTO;
-import co.edu.uco.treepruning.features.tree.gettreebyfilter.application.inputport.dto.GetTreeFilterDTO;
 
 @RestController
 @RequestMapping("/api/v1/trees")
@@ -30,13 +31,13 @@ public class GetTreeController {
             @RequestParam(required = false) UUID familyId,
             @RequestParam(required = false) UUID sectorId) {
         List<GetTreeDTO> results = inputPort.execute(
-                new GetTreeFilterDTO(id, familyId, sectorId));
+                new GetTreeDTO(id, null, null, new GetFamilyDTO(familyId, null, null), new GetSectorDTO(sectorId, null), null));
         return ResponseEntity.ok(ApiResponse.ok("Árboles obtenidos exitosamente.", results));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<GetTreeDTO>> getById(@PathVariable UUID id) {
-        List<GetTreeDTO> results = inputPort.execute(new GetTreeFilterDTO(id, null, null));
+        List<GetTreeDTO> results = inputPort.execute(new GetTreeDTO(id, null, null, null, null, null));
         if (results.isEmpty()) {
             throw ResourceNotFoundException.create("Tree", id);
         }
