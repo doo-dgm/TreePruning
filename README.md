@@ -208,26 +208,66 @@ Para Tree Pruning se identificaron veinte restricciones agrupadas en seis catego
 <a id="sec-2-3"></a>
 ### 2.3 Atributos de Calidad
 
-Los atributos de calidad son las propiedades del sistema que determinan su grado de excelencia más allá de la funcionalidad básica. Para Tree Pruning se identificaron 16 atributos mediante votación ponderada por los tres actores del sistema, resultando en la siguiente priorización:
+Los atributos de calidad son las propiedades del sistema que determinan su grado de excelencia más allá de la funcionalidad básica. Para Tree Pruning se identificaron 16 atributos mediante el método del **Mapa de Empatía**, en el que los tres actores del sistema (Administrador del Sistema, Encargado de Cuadrilla y Ciudadano) los valoraron independientemente en orden de importancia (16 = mayor importancia, 1 = menor importancia). Posteriormente se aplicó una ponderación real por actor para obtener la priorización arquitectónica definitiva.
 
-| Prioridad | Atributo de Calidad | Puntaje |
-|---|---|---|
-| 1 | Usabilidad | 16 |
-| 2 | Seguridad | 15 |
-| 3 | Disponibilidad | 14 |
-| 4 | Confiabilidad | 13 |
-| 5 | Rendimiento | 12 |
-| 6 | Accesibilidad | 11 |
-| 7 | Escalabilidad | 10 |
-| 8 | Costo | 9 |
-| 9 | Trazabilidad | 8 |
-| 10 | Interoperabilidad | 7 |
-| 11 | Capacidad | 6 |
-| 12 | Capacidad para ser desplegado | 5 |
-| 13 | Capacidad para ser soportado | 4 |
-| 14 | Capacidad para ser administrado | 3 |
-| 15 | Capacidad para ser mantenido | 2 |
-| 16 | Conformidad | 1 |
+#### Mapa de Empatía — Priorización por actores
+
+El siguiente gráfico muestra la distribución del porcentaje de importancia asignado por los actores a cada atributo (columna **Normal**) frente a la distribución ajustada por ponderación de actor (**Ponderación Real**). El Mapa de Empatía (izquierda) revela la percepción directa de los stakeholders; la Ponderación Real (derecha) refleja la importancia relativa una vez calibrado el peso de cada actor dentro del sistema.
+
+<p align="center" style="background-color:#ffffff; padding:16px; display:inline-block; border-radius:4px;">
+  <img src="./images/tp-empathy-map.png" alt="Mapa de Empatía y Ponderación Real — Atributos de Calidad" style="background-color:#ffffff;" />
+</p>
+
+**Tabla de valoración por actor:**
+
+| Atributo de Calidad | Admin. Sistema | Enc. Cuadrilla | Ciudadano | Normal | % Normal | Ponderación | % Ponderado |
+|---|---|---|---|---|---|---|---|
+| Usabilidad | 16 | 16 | 16 | 48 | 11.76% | 3 | 0.74% |
+| Seguridad | 12 | 9 | 12 | 33 | 8.09% | 18 | 4.41% |
+| Disponibilidad | 15 | 15 | 15 | 45 | 11.03% | 6 | 1.47% |
+| Confiabilidad | 14 | 14 | 14 | 42 | 10.29% | 9 | 2.21% |
+| Rendimiento | 13 | 13 | 13 | 39 | 9.56% | 12 | 2.94% |
+| Accesibilidad | 3 | 8 | 11 | 22 | 5.39% | 29 | 7.11% |
+| Escalabilidad | 11 | 7 | 7 | 25 | 6.13% | 26 | 6.37% |
+| Costo | 1 | 5 | 1 | 7 | 1.72% | 44 | 10.78% |
+| Trazabilidad | 6 | 11 | 9 | 26 | 6.37% | 25 | 6.13% |
+| Interoperabilidad | 5 | 12 | 10 | 27 | 6.62% | 24 | 5.88% |
+| Capacidad | 4 | 10 | 8 | 22 | 5.39% | 29 | 7.11% |
+| Capacidad para ser desplegado | 8 | 2 | 4 | 14 | 3.43% | 37 | 9.07% |
+| Capacidad para ser soportado | 9 | 4 | 5 | 18 | 4.41% | 33 | 8.09% |
+| Capacidad para ser administrado | 10 | 3 | 3 | 16 | 3.92% | 35 | 8.58% |
+| Capacidad para ser mantenido | 7 | 1 | 6 | 14 | 3.43% | 37 | 9.07% |
+| Conformidad | 2 | 6 | 2 | 10 | 2.45% | 41 | 10.05% |
+| **Total** | **136** | **136** | **136** | **408** | **100.00%** | **408** | **100.00%** |
+
+<p align="center" style="background-color:#ffffff; padding:16px; display:inline-block; border-radius:4px;">
+  <img src="./images/tp-empathy-radar.png" alt="Mapa de Empatía y Ponderado — Radar por actor" style="background-color:#ffffff;" />
+</p>
+
+#### Matriz de priorización arquitectónica
+
+La siguiente matriz ordena los 16 atributos de mayor a menor prioridad según el Mapa de Empatía. Los atributos en las posiciones 1–7 son los que condicionan directamente las decisiones de diseño del sistema y cuentan con escenarios de calidad detallados en las secciones 2.3.1–2.3.7.
+
+| Prioridad | Atributo de Calidad | % Normal | % Ponderado | Escenario documentado |
+|---|---|---|---|---|
+| 1 | Usabilidad | 11.76% | 0.74% | Sí — ESC-CAL-USA |
+| 2 | Seguridad | 8.09% | 4.41% | Sí — ESC-CAL-SEG |
+| 3 | Disponibilidad | 11.03% | 1.47% | Sí — ESC-CAL-DIS |
+| 4 | Confiabilidad | 10.29% | 2.21% | Sí — ESC-CAL-CON |
+| 5 | Rendimiento | 9.56% | 2.94% | Sí — ESC-CAL-REN |
+| 6 | Accesibilidad | 5.39% | 7.11% | — |
+| 7 | Escalabilidad | 6.13% | 6.37% | Sí — ESC-CAL-ESC |
+| 8 | Costo | 1.72% | 10.78% | — |
+| 9 | Trazabilidad | 6.37% | 6.13% | Sí — ESC-CAL-TRA |
+| 10 | Interoperabilidad | 6.62% | 5.88% | — |
+| 11 | Capacidad | 5.39% | 7.11% | — |
+| 12 | Capacidad para ser desplegado | 3.43% | 9.07% | — |
+| 13 | Capacidad para ser soportado | 4.41% | 8.09% | — |
+| 14 | Capacidad para ser administrado | 3.92% | 8.58% | — |
+| 15 | Capacidad para ser mantenido | 3.43% | 9.07% | — |
+| 16 | Conformidad | 2.45% | 10.05% | — |
+
+> **Nota sobre la divergencia Normal vs. Ponderado:** Atributos como Usabilidad (11.76% normal → 0.74% ponderado) tienen alta percepción de importancia por todos los actores pero bajo peso relativo en la ponderación porque su satisfacción se da por garantizada en cualquier sistema moderno. Por el contrario, Costo (1.72% normal → 10.78% ponderado) y Conformidad (2.45% → 10.05%) tienen alto peso ponderado porque los actores con mayor responsabilidad institucional (Administrador) los consideran restricciones no negociables.
 
 <a id="sec-2-3-1"></a>
 #### 2.3.1 Atributo: Rendimiento
