@@ -200,7 +200,7 @@ Para Tree Pruning se identificaron veinte restricciones agrupadas en seis catego
 
 | Código | Restricción | Impacto en el diseño |
 |---|---|---|
-| **RN-OPE-001** | El sistema debe operar en horario laboral de lunes a sábado, incluyendo festivos. | La disponibilidad del 99.5% se mide sobre el horario laboral establecido (ver Anexo C — SLA). Las ventanas de mantenimiento se ubican fuera de este rango. |
+| **RN-OPE-001** | El sistema debe garantizar disponibilidad continua durante las jornadas operativas del municipio, sin interrupciones planificadas dentro de dichas jornadas. | La disponibilidad del 99.5% se mide sobre el horario laboral establecido (ver Anexo C — SLA). Las ventanas de mantenimiento se ubican fuera de este rango. |
 | **RN-OPE-002** | El sistema debe ser accesible desde dispositivos institucionales existentes sin actualizaciones de hardware. | Los requerimientos mínimos del cliente son: Intel Core i3, 4 GB RAM, navegador Chrome/Edge actualizado. El Frontend (Vue.js 3 + Bootstrap 5.3+) debe rendir adecuadamente en esa configuración base. |
 
 ---
@@ -248,24 +248,24 @@ El siguiente gráfico muestra la distribución del porcentaje de importancia asi
 
 La siguiente matriz ordena los 16 atributos de mayor a menor prioridad según el Mapa de Empatía. Los atributos en las posiciones 1–7 son los que condicionan directamente las decisiones de diseño del sistema y cuentan con escenarios de calidad detallados en las secciones 2.3.1–2.3.7.
 
-| Prioridad | Atributo de Calidad | % Normal | % Ponderado | Escenario documentado |
-|---|---|---|---|---|
-| 1 | Usabilidad | 11.76% | 0.74% | Sí — ESC-CAL-USA |
-| 2 | Seguridad | 8.09% | 4.41% | Sí — ESC-CAL-SEG |
-| 3 | Disponibilidad | 11.03% | 1.47% | Sí — ESC-CAL-DIS |
-| 4 | Confiabilidad | 10.29% | 2.21% | Sí — ESC-CAL-CON |
-| 5 | Rendimiento | 9.56% | 2.94% | Sí — ESC-CAL-REN |
-| 6 | Accesibilidad | 5.39% | 7.11% | — |
-| 7 | Escalabilidad | 6.13% | 6.37% | Sí — ESC-CAL-ESC |
-| 8 | Costo | 1.72% | 10.78% | — |
-| 9 | Trazabilidad | 6.37% | 6.13% | Sí — ESC-CAL-TRA |
-| 10 | Interoperabilidad | 6.62% | 5.88% | — |
-| 11 | Capacidad | 5.39% | 7.11% | — |
-| 12 | Capacidad para ser desplegado | 3.43% | 9.07% | — |
-| 13 | Capacidad para ser soportado | 4.41% | 8.09% | — |
-| 14 | Capacidad para ser administrado | 3.92% | 8.58% | — |
-| 15 | Capacidad para ser mantenido | 3.43% | 9.07% | — |
-| 16 | Conformidad | 2.45% | 10.05% | — |
+| Prioridad | Atributo de Calidad | % Normal | % Ponderado |
+|---|---|---|---|
+| 1 | Usabilidad | 11.76% | 0.74% |
+| 2 | Seguridad | 8.09% | 4.41% |
+| 3 | Disponibilidad | 11.03% | 1.47% |
+| 4 | Confiabilidad | 10.29% | 2.21% |
+| 5 | Rendimiento | 9.56% | 2.94% |
+| 6 | Accesibilidad | 5.39% | 7.11% |
+| 7 | Escalabilidad | 6.13% | 6.37% |
+| 8 | Costo | 1.72% | 10.78% |
+| 9 | Trazabilidad | 6.37% | 6.13% |
+| 10 | Interoperabilidad | 6.62% | 5.88% |
+| 11 | Capacidad | 5.39% | 7.11% |
+| 12 | Capacidad para ser desplegado | 3.43% | 9.07% |
+| 13 | Capacidad para ser soportado | 4.41% | 8.09% |
+| 14 | Capacidad para ser administrado | 3.92% | 8.58% |
+| 15 | Capacidad para ser mantenido | 3.43% | 9.07% |
+| 16 | Conformidad | 2.45% | 10.05% |
 
 > **Nota sobre la divergencia Normal vs. Ponderado:** Atributos como Usabilidad (11.76% normal → 0.74% ponderado) tienen alta percepción de importancia por todos los actores pero bajo peso relativo en la ponderación porque su satisfacción se da por garantizada en cualquier sistema moderno. Por el contrario, Costo (1.72% normal → 10.78% ponderado) y Conformidad (2.45% → 10.05%) tienen alto peso ponderado porque los actores con mayor responsabilidad institucional (Administrador) los consideran restricciones no negociables.
 
@@ -380,9 +380,9 @@ La disponibilidad garantiza que el sistema esté operativo y accesible durante e
 | Campo | Detalle |
 |---|---|
 | **Código** | ESC-CAL-DIS-0001 |
-| **Objetivo** | Asegurar que el sistema esté disponible y responda correctamente durante el horario laboral (6 AM – 6 PM) con disponibilidad del 99.5% anual |
-| **Criterio de éxito** | El sistema está disponible para todos los usuarios, garantizando 99.5% de disponibilidad anual durante el horario laboral |
-| **Fuente del estímulo** | Usuario autenticado o por autenticar que intenta acceder dentro del horario laboral |
+| **Objetivo** | Asegurar que el sistema esté disponible y responda correctamente durante las jornadas operativas del municipio, con disponibilidad del 99.5% anual |
+| **Criterio de éxito** | El sistema está disponible para todos los usuarios, garantizando el 99.5% de disponibilidad anual sobre el horario laboral establecido |
+| **Fuente del estímulo** | Usuario autenticado o por autenticar que intenta acceder al sistema durante su jornada operativa |
 | **Estímulo** | Intentar ingresar al aplicativo y realizar solicitudes |
 | **Respuesta** | El sistema se encuentra disponible, permite el ingreso y responde correctamente a todas las solicitudes |
 | **Medida de la respuesta** | El sistema mantiene disponibilidad continua durante el 99.5% de las horas anuales del horario laboral |
