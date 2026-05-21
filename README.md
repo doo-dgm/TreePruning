@@ -595,6 +595,7 @@ Tree Pruning opera como el sistema central de gestión de arbolado urbano del mu
 | GitHub Actions | Sistema externo | HTTPS | Pipeline CI/CD que despliega automáticamente en la VM Azure |
 | Infisical | Sistema externo (SaaS) | HTTPS | Gestión y distribución de secretos al sistema |
 
+![Modelo de Contexto del Sistema](./images/tp-context-model.png)
 ---
 
 
