@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { statusService, treeService, quadrilleService, pruningTypeService, pruningService } from '@/services'
+import { statusService, treeService, quadrilleService, pruningTypeService, pruningService } from '@/data/services'
 
 const statuses = ref([])
 const trees = ref([])

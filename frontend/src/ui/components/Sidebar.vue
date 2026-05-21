@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/presentation/stores/auth'
 import logo from '@/assets/arbol.png'
 
 const router = useRouter()

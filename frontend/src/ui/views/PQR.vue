@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { statusService, pqrService } from '@/services'
+import { statusService, pqrService } from '@/data/services'
 
 const statuses = ref([])
 const loading = ref(false)
