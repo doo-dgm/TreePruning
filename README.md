@@ -200,7 +200,7 @@ Para Tree Pruning se identificaron veinte restricciones agrupadas en seis catego
 
 | Código | Restricción | Impacto en el diseño |
 |---|---|---|
-| **RN-OPE-001** | El sistema debe operar en horario laboral 6 AM – 6 PM de lunes a sábado. | La disponibilidad del 99.5% se mide sobre el horario laboral establecido (ver Anexo C — SLA). Las ventanas de mantenimiento se ubican fuera de este rango. |
+| **RN-OPE-001** | El sistema debe operar en horario laboral de lunes a sábado, incluyendo festivos. | La disponibilidad del 99.5% se mide sobre el horario laboral establecido (ver Anexo C — SLA). Las ventanas de mantenimiento se ubican fuera de este rango. |
 | **RN-OPE-002** | El sistema debe ser accesible desde dispositivos institucionales existentes sin actualizaciones de hardware. | Los requerimientos mínimos del cliente son: Intel Core i3, 4 GB RAM, navegador Chrome/Edge actualizado. El Frontend (Vue.js 3 + Bootstrap 5.3+) debe rendir adecuadamente en esa configuración base. |
 
 ---
@@ -425,8 +425,8 @@ La disponibilidad garantiza que el sistema esté operativo y accesible durante e
 | Campo | Detalle |
 |---|---|
 | **Código** | ESC-CAL-USA-0003 |
-| **Objetivo** | Garantizar que todos los formularios presenten estructura, estilo visual y comportamiento consistentes |
-| **Criterio de éxito** | Al interactuar con un formulario, el usuario identifica inmediatamente el campo activo, los campos obligatorios con asterisco (*) y los mensajes de error en rojo |
+| **Objetivo** | Garantizar que todos los formularios del sistema presenten estructura, estilo visual y comportamiento de validación uniforme, de modo que el usuario identifique claramente el campo activo, reconozca los campos requeridos y comprenda los mensajes de error en el momento en que ocurren; cumpliendo los estándares de accesibilidad WCAG 2.1 nivel AA: contraste suficiente, navegabilidad por teclado y compatibilidad con lectores de pantalla |
+| **Criterio de éxito** | Al interactuar con el formulario, el usuario identifica el campo activo por su indicador visual (borde o cambio de estado), reconoce los campos requeridos por la etiqueta con asterisco (*) y texto de apoyo, y recibe mensajes de validación en el momento del error con indicador visual y descripción de la corrección esperada |
 | **Fuente del estímulo** | Cualquier usuario del sistema |
 | **Estímulo** | El usuario selecciona o interactúa con un formulario para ingresar datos |
 | **Respuesta** | El sistema presenta el formulario con campos obligatorios identificados mediante asterisco (*), delimitadores de color verde y mensajes de error descriptivos |
